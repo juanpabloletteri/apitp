@@ -1,9 +1,9 @@
 <?php
 /**
- * Slim Framework (http://slimframework.com)
+ * Slim Framework (https://slimframework.com)
  *
  * @link      https://github.com/slimphp/Slim
- * @copyright Copyright (c) 2011-2015 Josh Lockhart
+ * @copyright Copyright (c) 2011-2017 Josh Lockhart
  * @license   https://github.com/slimphp/Slim/blob/3.x/LICENSE.md (MIT License)
  */
 namespace Slim\Http;
@@ -109,8 +109,16 @@ class Uri implements UriInterface
      * @param string $user     Uri user.
      * @param string $password Uri password.
      */
-    public function __construct($scheme, $host, $port = null, $path = '/', $query = '', $fragment = '', $user = '', $password = '')
-    {
+    public function __construct(
+        $scheme,
+        $host,
+        $port = null,
+        $path = '/',
+        $query = '',
+        $fragment = '',
+        $user = '',
+        $password = ''
+    ) {
         $this->scheme = $this->filterScheme($scheme);
         $this->host = $host;
         $this->port = $this->filterPort($port);
@@ -191,7 +199,11 @@ class Uri implements UriInterface
         // Path
         $requestScriptName = parse_url($env->get('SCRIPT_NAME'), PHP_URL_PATH);
         $requestScriptDir = dirname($requestScriptName);
-        $requestUri = parse_url($env->get('REQUEST_URI'), PHP_URL_PATH);
+
+        // parse_url() requires a full URL. As we don't extract the domain name or scheme,
+        // we use a stand-in.
+        $requestUri = parse_url('http://example.com' . $env->get('REQUEST_URI'), PHP_URL_PATH);
+
         $basePath = '';
         $virtualPath = $requestUri;
         if (stripos($requestUri, $requestScriptName) === 0) {
@@ -206,6 +218,9 @@ class Uri implements UriInterface
 
         // Query string
         $queryString = $env->get('QUERY_STRING', '');
+        if ($queryString === '') {
+            $queryString = parse_url('http://example.com' . $env->get('REQUEST_URI'), PHP_URL_QUERY);
+        }
 
         // Fragment
         $fragment = '';

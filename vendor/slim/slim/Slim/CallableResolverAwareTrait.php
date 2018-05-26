@@ -1,15 +1,15 @@
 <?php
 /**
- * Slim Framework (http://slimframework.com)
+ * Slim Framework (https://slimframework.com)
  *
  * @link      https://github.com/slimphp/Slim
- * @copyright Copyright (c) 2011-2015 Josh Lockhart
+ * @copyright Copyright (c) 2011-2017 Josh Lockhart
  * @license   https://github.com/slimphp/Slim/blob/3.x/LICENSE.md (MIT License)
  */
 namespace Slim;
 
 use RuntimeException;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Slim\Interfaces\CallableResolverInterface;
 
 /**
@@ -27,7 +27,7 @@ trait CallableResolverAwareTrait
      * Resolve a string of the format 'class:method' into a closure that the
      * router can dispatch.
      *
-     * @param mixed $callable
+     * @param callable|string $callable
      *
      * @return \Closure
      *
