@@ -28,8 +28,11 @@ desarrollo para obtener información sobre los errores
 $app = new \Slim\App(["settings" => $config]);
 
 
+$app->get('[/]', function (Request $request, Response $response) {    
+    $response->getBody()->write("GET => Bienvenido!!! ,a SlimFramework");
+    return $response;
 
-
+});
 
 
 //************ CHOFERES ************//
@@ -69,6 +72,15 @@ $app->post('/modificarChofer',function($request,$response){
     $telefono = $datos['telefono'];
     $legajo = $datos['legajo'];
     $response->write(chofer::modificarChofer($id,$nombre,$apellido,$dni,$telefono,$legajo));
+    return $response;
+});
+
+//MODIFICAR PUNTAJE CHOFER *************************/
+$app->post('/modificarPuntajeChofer',function($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $puntaje = $datos['puntaje'];
+    $response->write(chofer::modificarPuntajeChofer($id,$puntaje));
 
     return $response;
 });
@@ -125,6 +137,16 @@ $app->post('/modificarCliente',function($request,$response){
     $telefono = $datos['telefono'];
     $domicilio = $datos['domicilio'];
     $response->write(cliente::modificarCliente($id,$nombre,$apellido,$dni,$telefono,$domicilio));
+
+    return $response;
+});
+
+//MODIFICAR PUNTAJE CLIENTE *************************/
+$app->post('/modificarPuntajeCliente',function($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $puntaje = $datos['puntaje'];
+    $response->write(cliente::modificarPuntajeCliente($id,$puntaje));
 
     return $response;
 });

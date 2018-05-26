@@ -59,11 +59,12 @@ class cliente{
         $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE `clientes` 
         SET `nombre`= :nombre,
         `apellido`=:apellido,
-        `dni`= :dni 
-        `telefono`= :telefono 
+        `dni`= :dni, 
+        `telefono`= :telefono, 
         `domicilio`= :domicilio 
-        WHERE id_cliente = :id");
+        WHERE 'id_cliente' = :id");
 
+        $consulta->bindValue(':id',$id);
         $consulta->bindValue(':nombre',$nombre);
         $consulta->bindValue(':apellido', $apellido);
         $consulta->bindValue(':dni', $dni);
@@ -74,6 +75,23 @@ class cliente{
             $rta = true;
         }
         return $rta;
+    }
+
+   //MODIFICAR puntaje del cliente
+   public static function modificarPuntajeCliente($id,$puntaje){
+    $rta = false;
+    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+    $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE `clientes` 
+    SET `puntaje_cliente`= :puntaje
+    WHERE id_cliente = :id");
+
+    $consulta->bindValue(':id',$id);
+    $consulta->bindValue(':puntaje', $puntaje);
+
+    if ($consulta->execute()){
+        $rta = true;
+    }
+    return $rta;
     }
 
     //BORRAR cliente

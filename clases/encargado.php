@@ -52,17 +52,18 @@ class encargado{
     }
 
    //MODIFICAR ENCARGADO
-    public static function modificarEncargado($nombre,$apellido,$dni,$telefono,$legajo){
+    public static function modificarEncargado($id,$nombre,$apellido,$dni,$telefono,$legajo){
         $rta = false;
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE `encargados` 
         SET `nombre`= :nombre,
         `apellido`=:apellido,
-        `dni`= :dni 
-        `telefono`= :telefono 
+        `dni`= :dni,
+        `telefono`= :telefono,
         `legajo`= :legajo 
-        WHERE id_encargado = :id");
+        WHERE 'id_encargado' = :id");
 
+        $consulta->bindValue(':id',$id);
         $consulta->bindValue(':nombre',$nombre);
         $consulta->bindValue(':apellido', $apellido);
         $consulta->bindValue(':dni', $dni);

@@ -59,10 +59,10 @@ class chofer{
         $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE `choferes` 
         SET `nombre`= :nombre,
         `apellido`=:apellido,
-        `dni`= :dni 
-        `telefono`= :telefono 
+        `dni`= :dni, 
+        `telefono`= :telefono, 
         `legajo`= :legajo 
-        WHERE id_chofer= :id");
+        WHERE 'id_chofer'= :id");
 
         $consulta->bindValue(':id',$id);
         $consulta->bindValue(':nombre',$nombre);
@@ -75,6 +75,23 @@ class chofer{
             $rta = true;
         }
         return $rta;
+    }
+
+   //MODIFICAR puntaje del chofer
+   public static function modificarPuntajeChofer($id,$puntaje){
+    $rta = false;
+    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+    $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE `choferes` 
+    SET `puntaje_chofer`= :puntaje
+    WHERE id_chofer = :id");
+
+    $consulta->bindValue(':id',$id);
+    $consulta->bindValue(':puntaje', $puntaje);
+
+    if ($consulta->execute()){
+        $rta = true;
+    }
+    return $rta;
     }
 
     //BORRAR Chofer
