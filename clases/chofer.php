@@ -8,6 +8,7 @@ class chofer{
     private $_dni;
     private $_telefono;
     private $_legajo;
+    private $_puntaje_chofer;
 
     //AGREGAR Chofer
     public static function agregarChofer($nombre,$apellido,$dni,$telefono,$legajo)

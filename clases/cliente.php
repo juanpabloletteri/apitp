@@ -8,6 +8,7 @@ class cliente{
     private $_dni;
     private $_telefono;
     private $_domicilio;
+    private $_puntaje_cliente;
 
     //AGREGAR cliente
     public static function agregarCliente($nombre,$apellido,$dni,$telefono,$domicilio)
