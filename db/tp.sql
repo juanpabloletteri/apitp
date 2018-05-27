@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2018 a las 23:59:00
+-- Tiempo de generación: 28-05-2018 a las 00:22:56
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -72,8 +72,16 @@ CREATE TABLE `usuarios` (
   `nombre` varchar(50) COLLATE utf16_spanish_ci NOT NULL,
   `apellido` varchar(50) COLLATE utf16_spanish_ci NOT NULL,
   `dni` int(11) NOT NULL,
-  `telefono` int(20) NOT NULL
+  `telefono` int(20) NOT NULL,
+  `tipo` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `mail`, `password`, `nombre`, `apellido`, `dni`, `telefono`, `tipo`) VALUES
+(9, 'juanp@gmail.com', 'asd123', 'joselooooo', 'perez', 36451289, 142233654, 1);
 
 -- --------------------------------------------------------
 
@@ -181,7 +189,7 @@ ALTER TABLE `encargados`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `vehiculos`

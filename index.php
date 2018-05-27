@@ -46,7 +46,8 @@ $app->post('/agregarUsuario',function($request,$response){
     $apellido = $datos['apellido'];
     $dni = $datos['dni'];
     $telefono = $datos['telefono'];
-    $response->write(usuario::agregarUsuario($mail,$password,$nombre,$apellido,$dni,$telefono));
+    $tipo = $datos['tipo'];
+    $response->write(usuario::agregarUsuario($mail,$password,$nombre,$apellido,$dni,$telefono,$tipo));
 });
 
 //TRAER TODOS LOS USUARIOS *************************/
@@ -73,7 +74,8 @@ $app->post('/modificarUsuario',function($request,$response){
     $apellido = $datos['apellido'];
     $dni = $datos['dni'];
     $telefono = $datos['telefono'];
-    $response->write(usuario::modificarUsuario($id,$mail,$password,$nombre,$apellido,$dni,$telefono));
+    $tipo = $datos['tipo'];
+    $response->write(usuario::modificarUsuario($id,$mail,$password,$nombre,$apellido,$dni,$telefono,$tipo));
 
     return $response;
 });
