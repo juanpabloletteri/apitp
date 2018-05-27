@@ -5,6 +5,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require_once './vendor/autoload.php';
 require_once './clases/AccesoDatos.php';
 
+require_once './clases/usuario.php';
 require_once './clases/chofer.php';
 require_once './clases/cliente.php';
 require_once './clases/encargado.php';
@@ -33,6 +34,60 @@ $app->get('[/]', function (Request $request, Response $response) {
     return $response;
 
 });
+
+//************ USUARIOS ************//
+
+//AGREGAR USUARIO  *************************/
+$app->post('/agregarUsuario',function($request,$response){
+    $datos = $request->getParsedBody();
+    $mail = $datos['mail'];
+    $password = $datos['password'];
+    $nombre = $datos['nombre'];
+    $apellido = $datos['apellido'];
+    $dni = $datos['dni'];
+    $telefono = $datos['telefono'];
+    $response->write(usuario::agregarUsuario($mail,$password,$nombre,$apellido,$dni,$telefono));
+});
+
+//TRAER TODOS LOS USUARIOS *************************/
+$app->get('/traerTodosLosUsuarios',function ($request,$response){
+    $response->write(usuario::traerTodosLosUsuarios());
+    return $response;
+});
+
+//TRAER USUARIO POR ID *************************/
+$app->post('/traerUsuarioPorId',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(usuario::traerUsuarioPorId($id));
+    return $response;
+});
+
+//MODIFICAR USUARIO *************************/
+$app->post('/modificarUsuario',function($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $mail = $datos['mail'];
+    $password = $datos['password'];
+    $nombre = $datos['nombre'];
+    $apellido = $datos['apellido'];
+    $dni = $datos['dni'];
+    $telefono = $datos['telefono'];
+    $response->write(usuario::modificarUsuario($id,$mail,$password,$nombre,$apellido,$dni,$telefono));
+
+    return $response;
+});
+
+//BORRAR USUARIO *************************/
+$app->post('/borrarUsuario',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(usuario::borrarUsuario($id));
+    return $response;
+});
+
+//**********************************//
+
 
 
 //************ CHOFERES ************//
