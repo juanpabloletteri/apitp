@@ -8,7 +8,6 @@ class cliente{
     private $_dni;
     private $_telefono;
     private $_domicilio;
-    private $_puntaje_cliente;
 
     //AGREGAR cliente
     public static function agregarCliente($nombre,$apellido,$dni,$telefono,$domicilio)
@@ -75,23 +74,6 @@ class cliente{
             $rta = true;
         }
         return $rta;
-    }
-
-   //MODIFICAR puntaje del cliente
-   public static function modificarPuntajeCliente($id,$puntaje){
-    $rta = false;
-    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-    $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE `clientes` 
-    SET `puntaje_cliente`= :puntaje
-    WHERE id_cliente = :id");
-
-    $consulta->bindValue(':id',$id);
-    $consulta->bindValue(':puntaje', $puntaje);
-
-    if ($consulta->execute()){
-        $rta = true;
-    }
-    return $rta;
     }
 
     //BORRAR cliente

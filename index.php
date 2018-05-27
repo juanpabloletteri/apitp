@@ -75,16 +75,6 @@ $app->post('/modificarChofer',function($request,$response){
     return $response;
 });
 
-//MODIFICAR PUNTAJE CHOFER *************************/
-$app->post('/modificarPuntajeChofer',function($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $puntaje = $datos['puntaje'];
-    $response->write(chofer::modificarPuntajeChofer($id,$puntaje));
-
-    return $response;
-});
-
 //BORRAR CHOFER *************************/
 $app->post('/borrarChofer',function ($request,$response){
     $datos = $request->getParsedBody();
@@ -137,16 +127,6 @@ $app->post('/modificarCliente',function($request,$response){
     $telefono = $datos['telefono'];
     $domicilio = $datos['domicilio'];
     $response->write(cliente::modificarCliente($id,$nombre,$apellido,$dni,$telefono,$domicilio));
-
-    return $response;
-});
-
-//MODIFICAR PUNTAJE CLIENTE *************************/
-$app->post('/modificarPuntajeCliente',function($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $puntaje = $datos['puntaje'];
-    $response->write(cliente::modificarPuntajeCliente($id,$puntaje));
 
     return $response;
 });

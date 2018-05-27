@@ -8,7 +8,6 @@ class chofer{
     private $_dni;
     private $_telefono;
     private $_legajo;
-    private $_puntaje_chofer;
 
     //AGREGAR Chofer
     public static function agregarChofer($nombre,$apellido,$dni,$telefono,$legajo)
@@ -75,23 +74,6 @@ class chofer{
             $rta = true;
         }
         return $rta;
-    }
-
-   //MODIFICAR puntaje del chofer
-   public static function modificarPuntajeChofer($id,$puntaje){
-    $rta = false;
-    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-    $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE `choferes` 
-    SET `puntaje_chofer`= :puntaje
-    WHERE id_chofer = :id");
-
-    $consulta->bindValue(':id',$id);
-    $consulta->bindValue(':puntaje', $puntaje);
-
-    if ($consulta->execute()){
-        $rta = true;
-    }
-    return $rta;
     }
 
     //BORRAR Chofer

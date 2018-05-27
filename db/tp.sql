@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2018 a las 01:11:54
+-- Tiempo de generación: 27-05-2018 a las 02:19:35
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -34,17 +34,16 @@ CREATE TABLE `choferes` (
   `apellido` varchar(50) NOT NULL,
   `dni` int(11) NOT NULL,
   `telefono` int(11) NOT NULL,
-  `legajo` int(11) NOT NULL,
-  `puntaje_chofer` int(11) NOT NULL
+  `legajo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `choferes`
 --
 
-INSERT INTO `choferes` (`id_chofer`, `nombre`, `apellido`, `dni`, `telefono`, `legajo`, `puntaje_chofer`) VALUES
-(1, 'jose', 'maradona', 29145554, 1156874265, 201, 0),
-(4, 'alberto', 'perez', 36145554, 1145126589, 203, 0);
+INSERT INTO `choferes` (`id_chofer`, `nombre`, `apellido`, `dni`, `telefono`, `legajo`) VALUES
+(1, 'jose', 'maradona', 29145554, 1156874265, 201),
+(4, 'alberto', 'perez', 36145554, 1145126589, 203);
 
 -- --------------------------------------------------------
 
@@ -58,17 +57,16 @@ CREATE TABLE `clientes` (
   `apellido` varchar(50) NOT NULL,
   `dni` int(11) NOT NULL,
   `telefono` int(11) NOT NULL,
-  `domicilio` varchar(50) NOT NULL,
-  `puntaje_cliente` int(11) NOT NULL
+  `domicilio` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id_cliente`, `nombre`, `apellido`, `dni`, `telefono`, `domicilio`, `puntaje_cliente`) VALUES
-(1, 'raul', 'mazzeo', 36145554, 1145126589, 'villlegas 1200', 0),
-(3, 'elizabeth', 'vernacci', 36145554, 1145126589, 'mitre 124', 0);
+INSERT INTO `clientes` (`id_cliente`, `nombre`, `apellido`, `dni`, `telefono`, `domicilio`) VALUES
+(1, 'raul', 'mazzeo', 36145554, 1145126589, 'villlegas 1200'),
+(3, 'elizabeth', 'vernacci', 36145554, 1145126589, 'mitre 124');
 
 -- --------------------------------------------------------
 
@@ -91,7 +89,7 @@ CREATE TABLE `encargados` (
 
 INSERT INTO `encargados` (`id_encargado`, `nombre`, `apellido`, `dni`, `telefono`, `legajo`) VALUES
 (1, 'elizabeth', 'vernacci', 36145554, 1145126589, 456),
-(3, 'carlos', 'loprete', 36145554, 1145126589, 546);
+(3, 'maria', 'gomez', 36254128, 1156894578, 456);
 
 -- --------------------------------------------------------
 
@@ -104,8 +102,7 @@ CREATE TABLE `vehiculos` (
   `id_chofer` int(11) NOT NULL,
   `marca` varchar(50) NOT NULL,
   `modelo` varchar(50) NOT NULL,
-  `anio` int(11) NOT NULL,
-  `puntaje_vehiculo` int(11) NOT NULL
+  `anio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -122,7 +119,9 @@ CREATE TABLE `viajes` (
   `id_vehiculo` int(11) NOT NULL,
   `direccion_inicio` varchar(50) NOT NULL,
   `direccion_destino` varchar(50) NOT NULL,
-  `puntaje` int(11) NOT NULL
+  `puntaje_chofer` int(11) NOT NULL,
+  `puntaje_vehiculo` int(11) NOT NULL,
+  `puntaje_cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
