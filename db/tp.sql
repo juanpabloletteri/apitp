@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-05-2018 a las 00:22:56
+-- Tiempo de generación: 29-05-2018 a las 01:48:58
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -94,7 +94,10 @@ CREATE TABLE `vehiculos` (
   `id_chofer` int(11) NOT NULL,
   `marca` varchar(50) NOT NULL,
   `modelo` varchar(50) NOT NULL,
-  `anio` int(11) NOT NULL
+  `anio` int(11) NOT NULL,
+  `fumar` int(11) NOT NULL,
+  `aire` int(11) NOT NULL,
+  `baul` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -112,7 +115,9 @@ CREATE TABLE `viajes` (
   `direccion_destino` varchar(50) NOT NULL,
   `puntaje_chofer` int(11) NOT NULL,
   `puntaje_vehiculo` int(11) NOT NULL,
-  `puntaje_cliente` int(11) NOT NULL
+  `puntaje_cliente` int(11) NOT NULL,
+  `estado` int(11) NOT NULL,
+  `forma_pago` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -171,19 +176,19 @@ ALTER TABLE `viajes`
 -- AUTO_INCREMENT de la tabla `choferes`
 --
 ALTER TABLE `choferes`
-  MODIFY `id_chofer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_chofer` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `encargados`
 --
 ALTER TABLE `encargados`
-  MODIFY `id_encargado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_encargado` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
