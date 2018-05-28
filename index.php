@@ -9,7 +9,8 @@ require_once './clases/usuario.php';
 require_once './clases/chofer.php';
 require_once './clases/cliente.php';
 require_once './clases/encargado.php';
-
+require_once './clases/vehiculo.php';
+require_once './clases/viaje.php';
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -253,6 +254,129 @@ $app->post('/borrarEncargado',function ($request,$response){
 });
 
 //**********************************//
+
+//************ VEHICULOS ************//
+
+//AGREGAR Vehiculo  *************************/
+$app->post('/agregarVehiculo',function($request,$response){
+    $datos = $request->getParsedBody();
+    $id_chofer = $datos['id_chofer'];
+    $marca = $datos['marca'];
+    $modelo = $datos['modelo'];
+    $anio = $datos['anio'];
+    $fumar = $datos['fumar'];
+    $aire = $datos['aire'];
+    $baul = $datos['baul'];
+    $response->write(vehiculo::agregarVehiculo($id_chofer,$marca,$modelo,$anio,$fumar,$aire,$baul));
+});
+
+//TRAER TODOS LOS Vehiculos *************************/
+$app->get('/traerTodosLosVehiculos',function ($request,$response){
+    $response->write(vehiculo::traerTodosLosVehiculos());
+    return $response;
+});
+
+//TRAER Vehiculo POR ID *************************/
+$app->post('/traerVehiculoPorId',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(vehiculo::traerVehiculoPorId($id));
+    return $response;
+});
+
+//MODIFICAR Vehiculo *************************/
+$app->post('/modificarVehiculo',function($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $id_chofer = $datos['id_chofer'];
+    $marca = $datos['marca'];
+    $modelo = $datos['modelo'];
+    $anio = $datos['anio'];
+    $fumar = $datos['fumar'];
+    $aire = $datos['aire'];
+    $baul = $datos['baul'];
+    $response->write(vehiculo::modificarVehiculo($id,$id_chofer,$marca,$modelo,$anio,$fumar,$aire,$baul));
+
+    return $response;
+});
+
+//BORRAR Vehiculo *************************/
+$app->post('/borrarVehiculo',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(vehiculo::borrarVehiculo($id));
+    return $response;
+});
+
+//**********************************//
+
+
+
+//************ VIAJES ************//
+
+//AGREGAR Viaje  *************************/
+$app->post('/agregarViaje',function($request,$response){
+    $datos = $request->getParsedBody();
+    $id_encargado = $datos['id_encargado'];
+    $id_cliente = $datos['id_cliente'];
+    $id_chofer = $datos['id_chofer'];
+    $id_vehiculo = $datos['id_vehiculo'];
+    $direccion_inicio = $datos['direccion_inicio'];
+    $direccion_destino = $datos['direccion_destino'];
+    $puntaje_chofer = $datos['puntaje_chofer'];
+    $puntaje_vehiculo = $datos['puntaje_vehiculo'];
+    $puntaje_cliente = $datos['puntaje_cliente'];
+    $estado = $datos['estado'];
+    $forma_pago = $datos['forma_pago'];
+    $response->write(Viaje::agregarViaje($id_encargado,$id_cliente,$id_chofer,$id_vehiculo,$direccion_inicio,$direccion_destino,$puntaje_chofer,$puntaje_vehiculo,$puntaje_cliente,$estado,$forma_pago));
+});
+
+//TRAER TODOS LOS viajes *************************/
+$app->get('/traerTodosLosviajes',function ($request,$response){
+    $response->write(Viaje::traerTodosLosviajes());
+    return $response;
+});
+
+//TRAER Viaje POR ID *************************/
+$app->post('/traerViajePorId',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(Viaje::traerViajePorId($id));
+    return $response;
+});
+
+//MODIFICAR Viaje *************************/
+$app->post('/modificarViaje',function($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $id_encargado = $datos['id_encargado'];
+    $id_cliente = $datos['id_cliente'];
+    $id_chofer = $datos['id_chofer'];
+    $id_vehiculo = $datos['id_vehiculo'];
+    $direccion_inicio = $datos['direccion_inicio'];
+    $direccion_destino = $datos['direccion_destino'];
+    $puntaje_chofer = $datos['puntaje_chofer'];
+    $puntaje_vehiculo = $datos['puntaje_vehiculo'];
+    $puntaje_cliente = $datos['puntaje_cliente'];
+    $estado = $datos['estado'];
+    $forma_pago = $datos['forma_pago'];
+    $response->write(Viaje::modificarViaje($id_encargado,$id_cliente,$id_chofer,$id_vehiculo,$direccion_inicio,$direccion_destino,$puntaje_chofer,$puntaje_vehiculo,$puntaje_cliente,$estado,$forma_pago));
+
+    return $response;
+});
+
+//BORRAR Viaje *************************/
+$app->post('/borrarViaje',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(Viaje::borrarViaje($id));
+    return $response;
+});
+
+//**********************************//
+
+
+
 
 
 $app->run();
