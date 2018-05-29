@@ -29,7 +29,7 @@ class usuario {
         $consulta->bindValue(':tipo',$tipo);
         
         if($consulta->execute()){
-            $rta = true;
+            $rta = $objetoAccesoDato->RetornarUltimoIdInsertado();
         }
         return $rta; 
     }    
