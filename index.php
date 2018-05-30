@@ -67,6 +67,14 @@ $app->post('/traerClientePorId',function ($request,$response){
     return $response;
 });
 
+//TRAER CELIENTE POR DNI *************************/
+$app->post('/traerClientePorDni',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $dni = $datos['dni'];
+    $response->write(cliente::traerClientePorDni($dni));
+    return $response;
+});
+
 //MODIFICAR CLIENTE *************************/
 $app->post('/modificarCliente',function($request,$response){
     $datos = $request->getParsedBody();

@@ -70,6 +70,17 @@ class cliente{
         return json_encode($datos);     
     }
 
+    //TRAER cliente POR DNI
+    public static function traerClientePorDni($dni)
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM usuarios AS u, clientes AS c WHERE u.id_usuario=c.id_usuario AND u.dni=:dni");
+        $consulta->bindValue(":dni",$dni);
+        $consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($datos);     
+    }
+
    //MODIFICAR cliente
     public static function modificarCliente($id,$nombre,$apellido,$dni,$telefono,$domicilio){
         $rta = false;
