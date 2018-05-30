@@ -53,7 +53,10 @@ class cliente{
     public static function traerTodosLosClientes()
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM usuarios AS u, clientes AS c WHERE u.id_usuario=c.id_usuario");
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * 
+        FROM usuarios AS u, clientes AS c 
+        WHERE u.id_usuario=c.id_usuario");
+        
         $consulta->execute();
         $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($consulta);
@@ -63,7 +66,10 @@ class cliente{
     public static function traerClientePorId($id)
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM usuarios AS u, clientes AS c WHERE u.id_usuario=c.id_usuario AND u.id_usuario=:id");
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * 
+        FROM usuarios AS u, clientes AS c 
+        WHERE u.id_usuario=c.id_usuario AND u.id_usuario=:id");
+
         $consulta->bindValue(":id",$id);
         $consulta->execute();
         $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -74,8 +80,26 @@ class cliente{
     public static function traerClientePorDni($dni)
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM usuarios AS u, clientes AS c WHERE u.id_usuario=c.id_usuario AND u.dni=:dni");
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * 
+        FROM usuarios AS u, clientes AS c 
+        WHERE u.id_usuario=c.id_usuario AND u.dni=:dni");
+
         $consulta->bindValue(":dni",$dni);
+        $consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($datos);     
+    }
+
+    //TRAER cliente POR DOMICILIO
+    public static function traerClientePorDomicilio($domicilio)
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * 
+        FROM usuarios AS u, clientes AS c 
+        WHERE u.id_usuario=c.id_usuario AND c.domicilio like '%$domicilio%'
+        ORDER BY c.domicilio ");
+
+        $consulta->bindValue(":domicilio",$domicilio);
         $consulta->execute();
         $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($datos);     

@@ -75,6 +75,14 @@ $app->post('/traerClientePorDni',function ($request,$response){
     return $response;
 });
 
+//TRAER CELIENTE POR DOMICILIO *************************/
+$app->post('/traerClientePorDomicilio',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $domicilio = $datos['domicilio'];
+    $response->write(cliente::traerClientePorDomicilio($domicilio));
+    return $response;
+});
+
 //MODIFICAR CLIENTE *************************/
 $app->post('/modificarCliente',function($request,$response){
     $datos = $request->getParsedBody();
