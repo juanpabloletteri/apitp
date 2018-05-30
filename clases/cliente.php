@@ -53,7 +53,7 @@ class cliente{
     public static function traerTodosLosClientes()
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM clientes");
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM usuarios AS u, clientes AS c WHERE u.id_usuario=c.id_usuario");
         $consulta->execute();
         $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($consulta);
@@ -63,7 +63,7 @@ class cliente{
     public static function traerClientePorId($id)
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM clientes WHERE id_cliente=:id");
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM usuarios AS u, clientes AS c WHERE u.id_usuario=c.id_usuario AND u.id_usuario=:id");
         $consulta->bindValue(":id",$id);
         $consulta->execute();
         $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);

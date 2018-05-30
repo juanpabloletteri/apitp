@@ -36,6 +36,66 @@ $app->get('[/]', function (Request $request, Response $response) {
 
 });
 
+//************ CLIENTES ************//
+
+//AGREGAR CLIENTE  *************************/
+$app->post('/agregarCliente',function($request,$response){
+    $datos = $request->getParsedBody();
+    $mail = $datos['mail'];
+    $password = $datos['password'];
+    $nombre = $datos['nombre'];
+    $apellido = $datos['apellido'];
+    $dni = $datos['dni'];
+    $telefono = $datos['telefono'];
+    $tipo = $datos['tipo'];
+    $domicilio = $datos['domicilio'];
+    $id_usuario=$response->write(cliente::agregarCliente($mail,$password,$nombre,$apellido,$dni,$telefono,$tipo,$domicilio));
+    return $response;
+});
+
+//TRAER TODOS LOS CLIENTES *************************/
+$app->get('/traerTodosLosClientes',function ($request,$response){
+    $response->write(cliente::traerTodosLosClientes());
+    return $response;
+});
+
+//TRAER CELIENTE POR ID *************************/
+$app->post('/traerClientePorId',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(cliente::traerClientePorId($id));
+    return $response;
+});
+
+//MODIFICAR CLIENTE *************************/
+$app->post('/modificarCliente',function($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $nombre = $datos['nombre'];
+    $apellido = $datos['apellido'];
+    $dni = $datos['dni'];
+    $telefono = $datos['telefono'];
+    $domicilio = $datos['domicilio'];
+    $response->write(cliente::modificarCliente($id,$nombre,$apellido,$dni,$telefono,$domicilio));
+
+    return $response;
+});
+
+//BORRAR CLIENTE *************************/
+$app->post('/borrarCliente',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(cliente::borrarCliente($id));
+    return $response;
+});
+
+//**********************************//
+
+
+
+
+
+
 //************ USUARIOS ************//
 
 //AGREGAR USUARIO  *************************/
@@ -142,69 +202,6 @@ $app->post('/borrarChofer',function ($request,$response){
 });
 
 //**********************************//
-
-
-
-
-
-
-//************ CLIENTES ************//
-
-//AGREGAR CLIENTE  *************************/
-$app->post('/agregarCliente',function($request,$response){
-    $datos = $request->getParsedBody();
-    $mail = $datos['mail'];
-    $password = $datos['password'];
-    $nombre = $datos['nombre'];
-    $apellido = $datos['apellido'];
-    $dni = $datos['dni'];
-    $telefono = $datos['telefono'];
-    $tipo = $datos['tipo'];
-    $domicilio = $datos['domicilio'];
-    $id_usuario=$response->write(cliente::agregarCliente($mail,$password,$nombre,$apellido,$dni,$telefono,$tipo,$domicilio));
-    return $response;
-});
-
-//TRAER TODOS LOS CLIENTES *************************/
-$app->get('/traerTodosLosClientes',function ($request,$response){
-    $response->write(cliente::traerTodosLosClientes());
-    return $response;
-});
-
-//TRAER CELIENTE POR ID *************************/
-$app->post('/traerClientePorId',function ($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $response->write(cliente::traerClientePorId($id));
-    return $response;
-});
-
-//MODIFICAR CLIENTE *************************/
-$app->post('/modificarCliente',function($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $nombre = $datos['nombre'];
-    $apellido = $datos['apellido'];
-    $dni = $datos['dni'];
-    $telefono = $datos['telefono'];
-    $domicilio = $datos['domicilio'];
-    $response->write(cliente::modificarCliente($id,$nombre,$apellido,$dni,$telefono,$domicilio));
-
-    return $response;
-});
-
-//BORRAR CLIENTE *************************/
-$app->post('/borrarCliente',function ($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $response->write(cliente::borrarCliente($id));
-    return $response;
-});
-
-//**********************************//
-
-
-
 
 
 
