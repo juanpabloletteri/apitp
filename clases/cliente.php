@@ -2,30 +2,49 @@
 
 class cliente{
 
+    private $_id_usuario;
     private $_id_cliente;
+    private $_mail;
+    private $_password;
     private $_nombre;
     private $_apellido;
     private $_dni;
     private $_telefono;
+    private $_tipo;
     private $_domicilio;
 
     //AGREGAR cliente
-    public static function agregarCliente($nombre,$apellido,$dni,$telefono,$domicilio)
+    public static function agregarCliente($mail,$password,$nombre,$apellido,$dni,$telefono,$tipo,$domicilio)
     {
-        $rta = false;
+        $rta = 0;
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-        $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into  
-        clientes (nombre,apellido,dni,telefono,domicilio)
-        values(:nombre,:apellido,:dni,:telefono,:domicilio)");
+        $consulta = $objetoAccesoDato->RetornarConsulta("INSERT into  
+        usuarios (mail, password,nombre,apellido,dni,telefono,tipo)
+        values(:mail,:password,:nombre,:apellido,:dni,:telefono,:tipo)");
 
+        $consulta->bindValue(':mail',$mail);
+        $consulta->bindValue(':password', $password);
         $consulta->bindValue(':nombre',$nombre);
         $consulta->bindValue(':apellido', $apellido);
         $consulta->bindValue(':dni', $dni);
         $consulta->bindValue(':telefono',$telefono);
-        $consulta->bindValue(':domicilio',$domicilio);
+        $consulta->bindValue(':tipo',$tipo);
 
-        if($consulta->execute()){
-            $rta = true;
+       if($consulta->execute()){
+            $rta=1;
+            $id_usuario = $objetoAccesoDato->RetornarUltimoIdInsertado();
+
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+            $consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO 
+            `clientes` ( `id_usuario`, `domicilio`)
+            VALUES (:id_usuario, :domicilio);");
+
+            $consulta->bindValue(':id_usuario', $id_usuario);
+            $consulta->bindValue(':domicilio',$domicilio);
+           if($consulta->execute()){
+               $rta=3; 
+           }
+  
         }
         return $rta; 
     }    

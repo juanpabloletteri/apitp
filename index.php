@@ -153,12 +153,16 @@ $app->post('/borrarChofer',function ($request,$response){
 //AGREGAR CLIENTE  *************************/
 $app->post('/agregarCliente',function($request,$response){
     $datos = $request->getParsedBody();
+    $mail = $datos['mail'];
+    $password = $datos['password'];
     $nombre = $datos['nombre'];
     $apellido = $datos['apellido'];
     $dni = $datos['dni'];
     $telefono = $datos['telefono'];
+    $tipo = $datos['tipo'];
     $domicilio = $datos['domicilio'];
-    $response->write(cliente::agregarCliente($nombre,$apellido,$dni,$telefono,$domicilio));
+    $id_usuario=$response->write(cliente::agregarCliente($mail,$password,$nombre,$apellido,$dni,$telefono,$tipo,$domicilio));
+    return $response;
 });
 
 //TRAER TODOS LOS CLIENTES *************************/
