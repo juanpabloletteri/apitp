@@ -106,18 +106,22 @@ class cliente{
     }
 
    //MODIFICAR cliente
-    public static function modificarCliente($id,$nombre,$apellido,$dni,$telefono,$domicilio){
+    public static function modificarCliente($id,$mail,$password,$nombre,$apellido,$dni,$telefono,$domicilio){
         $rta = false;
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE `clientes` 
-        SET `nombre`= :nombre,
-        `apellido`=:apellido,
-        `dni`= :dni, 
-        `telefono`= :telefono, 
-        `domicilio`= :domicilio 
-        WHERE 'id_cliente' = :id");
+        $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE usuarios AS u, clientes AS c 
+        SET u.mail=:mail,
+        u.password=:password,
+        u.nombre=:nombre,
+        u.apellido=:apellido,
+        u.dni=:dni,
+        u.telefono=:telefono,
+        c.domicilio=:domicilio
+        WHERE u.id_usuario=c.id_usuario AND u.id_usuario = :id");
 
         $consulta->bindValue(':id',$id);
+        $consulta->bindValue(':mail',$mail);
+        $consulta->bindValue(':password', $password);
         $consulta->bindValue(':nombre',$nombre);
         $consulta->bindValue(':apellido', $apellido);
         $consulta->bindValue(':dni', $dni);

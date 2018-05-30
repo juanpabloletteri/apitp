@@ -59,7 +59,7 @@ $app->get('/traerTodosLosClientes',function ($request,$response){
     return $response;
 });
 
-//TRAER CELIENTE POR ID *************************/
+//TRAER CLIENTE POR ID *************************/
 $app->post('/traerClientePorId',function ($request,$response){
     $datos = $request->getParsedBody();
     $id = $datos['id'];
@@ -67,7 +67,7 @@ $app->post('/traerClientePorId',function ($request,$response){
     return $response;
 });
 
-//TRAER CELIENTE POR DNI *************************/
+//TRAER CLIENTE POR DNI *************************/
 $app->post('/traerClientePorDni',function ($request,$response){
     $datos = $request->getParsedBody();
     $dni = $datos['dni'];
@@ -75,7 +75,7 @@ $app->post('/traerClientePorDni',function ($request,$response){
     return $response;
 });
 
-//TRAER CELIENTE POR DOMICILIO *************************/
+//TRAER CLIENTE POR DOMICILIO *************************/
 $app->post('/traerClientePorDomicilio',function ($request,$response){
     $datos = $request->getParsedBody();
     $domicilio = $datos['domicilio'];
@@ -87,12 +87,14 @@ $app->post('/traerClientePorDomicilio',function ($request,$response){
 $app->post('/modificarCliente',function($request,$response){
     $datos = $request->getParsedBody();
     $id = $datos['id'];
+    $mail = $datos['mail'];
+    $password = $datos['password'];
     $nombre = $datos['nombre'];
     $apellido = $datos['apellido'];
     $dni = $datos['dni'];
     $telefono = $datos['telefono'];
     $domicilio = $datos['domicilio'];
-    $response->write(cliente::modificarCliente($id,$nombre,$apellido,$dni,$telefono,$domicilio));
+    $response->write(cliente::modificarCliente($id,$mail,$password,$nombre,$apellido,$dni,$telefono,$domicilio));
 
     return $response;
 });
