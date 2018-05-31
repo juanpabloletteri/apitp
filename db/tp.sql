@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-05-2018 a las 01:48:58
+-- Tiempo de generación: 01-06-2018 a las 01:36:57
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -31,9 +31,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `choferes` (
   `id_chofer` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
-  `id_vehiculo` int(11) NOT NULL,
   `legajo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `choferes_vehiculos`
+--
+
+CREATE TABLE `choferes_vehiculos` (
+  `id_chofer` int(11) NOT NULL,
+  `id_vehiculo` int(11) NOT NULL,
+  `fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -47,6 +58,21 @@ CREATE TABLE `clientes` (
   `domicilio` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`id_cliente`, `id_usuario`, `domicilio`) VALUES
+(1, 10, '1321321313'),
+(2, 11, '1321321313'),
+(3, 12, '1321321313'),
+(4, 13, '1321321313'),
+(5, 14, '1321321313'),
+(6, 15, '13132'),
+(7, 16, '13132'),
+(8, 17, '13132'),
+(9, 18, '13132');
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +84,24 @@ CREATE TABLE `encargados` (
   `id_usuario` int(11) NOT NULL,
   `legajo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `puntajes`
+--
+
+CREATE TABLE `puntajes` (
+  `id_puntaje` int(11) NOT NULL,
+  `id_viaje` int(11) NOT NULL,
+  `puntaje_viaje` int(11) NOT NULL,
+  `id_chofer` int(11) NOT NULL,
+  `puntaje_chofer` int(11) NOT NULL,
+  `id_vehiculo` int(11) NOT NULL,
+  `puntaje_vehiculo` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `puntaje_cliente` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -81,7 +125,16 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `mail`, `password`, `nombre`, `apellido`, `dni`, `telefono`, `tipo`) VALUES
-(9, 'juanp@gmail.com', 'asd123', 'joselooooo', 'perez', 36451289, 142233654, 1);
+(9, 'juanp@gmail.com', 'asd123', 'joselooooo', 'perez', 36451289, 142233654, 1),
+(10, 'mail', 'uberto29124119', 'jujan', 'lelrkelr', 29124119, 2147483647, 3),
+(11, 'mail', 'uberto29124119', 'jujan', 'lelrkelr', 29124119, 2147483647, 3),
+(12, 'mail', 'uberto29124119', 'jujan', 'lelrkelr', 29124119, 2147483647, 3),
+(13, 'mail', 'uberto29124119', 'jujan', 'lelrkelr', 29124119, 2147483647, 3),
+(14, 'mail', 'uberto29124119', 'jujan', 'lelrkelr', 29124119, 2147483647, 3),
+(15, 'mail', 'uberto16546461', '32132132', '132132', 16546461, 2147483647, 3),
+(16, 'mail', 'uberto16546461', '32132132', '132132', 16546461, 2147483647, 3),
+(17, 'mailssss', 'uberto16546461', '32132132', '132132', 16546461, 2147483647, 3),
+(18, 'mailssssqweqwe', 'uberto16546461', 'qweqwe', '132132', 16546461, 2147483647, 3);
 
 -- --------------------------------------------------------
 
@@ -100,6 +153,14 @@ CREATE TABLE `vehiculos` (
   `baul` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `vehiculos`
+--
+
+INSERT INTO `vehiculos` (`id_vehiculo`, `id_chofer`, `marca`, `modelo`, `anio`, `fumar`, `aire`, `baul`) VALUES
+(3, 0, 'chevrolet', 'corsa', 2015, 0, 0, 0),
+(4, 0, 'fiat', 'palio', 2017, 1, 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -113,10 +174,9 @@ CREATE TABLE `viajes` (
   `id_chofer` int(11) NOT NULL,
   `direccion_inicio` varchar(50) NOT NULL,
   `direccion_destino` varchar(50) NOT NULL,
-  `puntaje_chofer` int(11) NOT NULL,
-  `puntaje_vehiculo` int(11) NOT NULL,
-  `puntaje_cliente` int(11) NOT NULL,
+  `distancia` int(11) NOT NULL,
   `estado` int(11) NOT NULL,
+  `costo` int(11) NOT NULL,
   `forma_pago` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -129,7 +189,13 @@ CREATE TABLE `viajes` (
 --
 ALTER TABLE `choferes`
   ADD PRIMARY KEY (`id_chofer`),
-  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `choferes_vehiculos`
+--
+ALTER TABLE `choferes_vehiculos`
+  ADD KEY `id_chofer` (`id_chofer`,`id_vehiculo`),
   ADD KEY `id_vehiculo` (`id_vehiculo`);
 
 --
@@ -145,6 +211,13 @@ ALTER TABLE `clientes`
 ALTER TABLE `encargados`
   ADD PRIMARY KEY (`id_encargado`),
   ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `puntajes`
+--
+ALTER TABLE `puntajes`
+  ADD PRIMARY KEY (`id_puntaje`),
+  ADD KEY `id_viaje` (`id_viaje`,`id_chofer`,`id_vehiculo`,`id_cliente`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -182,7 +255,7 @@ ALTER TABLE `choferes`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `encargados`
@@ -191,16 +264,22 @@ ALTER TABLE `encargados`
   MODIFY `id_encargado` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `puntajes`
+--
+ALTER TABLE `puntajes`
+  MODIFY `id_puntaje` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `vehiculos`
 --
 ALTER TABLE `vehiculos`
-  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `viajes`
@@ -219,6 +298,13 @@ ALTER TABLE `choferes`
   ADD CONSTRAINT `choferes_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
 
 --
+-- Filtros para la tabla `choferes_vehiculos`
+--
+ALTER TABLE `choferes_vehiculos`
+  ADD CONSTRAINT `choferes_vehiculos_ibfk_1` FOREIGN KEY (`id_chofer`) REFERENCES `choferes` (`id_chofer`),
+  ADD CONSTRAINT `choferes_vehiculos_ibfk_2` FOREIGN KEY (`id_vehiculo`) REFERENCES `vehiculos` (`id_vehiculo`);
+
+--
 -- Filtros para la tabla `clientes`
 --
 ALTER TABLE `clientes`
@@ -231,10 +317,10 @@ ALTER TABLE `encargados`
   ADD CONSTRAINT `encargados_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
 
 --
--- Filtros para la tabla `vehiculos`
+-- Filtros para la tabla `puntajes`
 --
-ALTER TABLE `vehiculos`
-  ADD CONSTRAINT `vehiculos_ibfk_1` FOREIGN KEY (`id_vehiculo`) REFERENCES `choferes` (`id_vehiculo`);
+ALTER TABLE `puntajes`
+  ADD CONSTRAINT `puntajes_ibfk_1` FOREIGN KEY (`id_viaje`) REFERENCES `viajes` (`id_viaje`);
 
 --
 -- Filtros para la tabla `viajes`
