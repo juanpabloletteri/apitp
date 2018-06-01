@@ -113,7 +113,164 @@ $app->post('/borrarCliente',function ($request,$response){
 
 
 
+//************ CHOFERES ************//
 
+//AGREGAR CHOFER  *************************/
+$app->post('/agregarChofer',function($request,$response){
+    $datos = $request->getParsedBody();
+    $mail = $datos['mail'];
+    $password = $datos['password'];
+    $nombre = $datos['nombre'];
+    $apellido = $datos['apellido'];
+    $dni = $datos['dni'];
+    $telefono = $datos['telefono'];
+    $tipo = $datos['tipo'];
+    $legajo = $datos['legajo'];
+    $id_usuario=$response->write(chofer::agregarChofer($mail,$password,$nombre,$apellido,$dni,$telefono,$tipo,$legajo));
+    return $response;
+});
+
+//TRAER TODOS LOS CHOFERES *************************/
+$app->get('/traerTodosLosChoferes',function ($request,$response){
+    $response->write(chofer::traerTodosLosChoferes());
+    return $response;
+});
+
+//TRAER Chofer POR ID *************************/
+$app->post('/traerChoferPorId',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(chofer::traerChoferPorId($id));
+    return $response;
+});
+
+//TRAER CHOFER POR DNI *************************/
+$app->post('/traerChoferPorDni',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $dni = $datos['dni'];
+    $response->write(chofer::traerChoferPorDni($dni));
+    return $response;
+});
+
+//TRAER CHOFER POR LEGAJO *************************/
+$app->post('/traerChoferPorLegajo',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $legajo = $datos['legajo'];
+    $response->write(chofer::traerChoferPorLegajo($legajo));
+    return $response;
+});
+
+//MODIFICAR CHOFER *************************/
+$app->post('/modificarChofer',function($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $mail = $datos['mail'];
+    $password = $datos['password'];
+    $nombre = $datos['nombre'];
+    $apellido = $datos['apellido'];
+    $dni = $datos['dni'];
+    $telefono = $datos['telefono'];
+    $legajo = $datos['legajo'];
+    $response->write(chofer::modificarChofer($id,$mail,$password,$nombre,$apellido,$dni,$telefono,$legajo));
+
+    return $response;
+});
+
+//BORRAR CHOFER *************************/
+$app->post('/borrarChofer',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(chofer::borrarChofer($id));
+    return $response;
+});
+
+//**********************************//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
 //************ USUARIOS ************//
 
 //AGREGAR USUARIO  *************************/
@@ -171,55 +328,7 @@ $app->post('/borrarUsuario',function ($request,$response){
 
 
 
-//************ CHOFERES ************//
 
-//AGREGAR CHOFER  *************************/
-$app->post('/agregarChofer',function($request,$response){
-    $datos = $request->getParsedBody();
-    $nombre = $datos['nombre'];
-    $apellido = $datos['apellido'];
-    $dni = $datos['dni'];
-    $telefono = $datos['telefono'];
-    $legajo = $datos['legajo'];
-    $response->write(chofer::agregarChofer($nombre,$apellido,$dni,$telefono,$legajo));
-});
-
-//TRAER TODOS LOS CHOFERES *************************/
-$app->get('/traerTodosLosChoferes',function ($request,$response){
-    $response->write(chofer::traerTodosLosChoferes());
-    return $response;
-});
-
-//TRAER CHOFER POR ID *************************/
-$app->post('/traerChoferPorId',function ($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $response->write(chofer::traerChoferPorId($id));
-    return $response;
-});
-
-//MODIFICAR CHOFER *************************/
-$app->post('/modificarChofer',function($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $nombre = $datos['nombre'];
-    $apellido = $datos['apellido'];
-    $dni = $datos['dni'];
-    $telefono = $datos['telefono'];
-    $legajo = $datos['legajo'];
-    $response->write(chofer::modificarChofer($id,$nombre,$apellido,$dni,$telefono,$legajo));
-    return $response;
-});
-
-//BORRAR CHOFER *************************/
-$app->post('/borrarChofer',function ($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $response->write(chofer::borrarChofer($id));
-    return $response;
-});
-
-//**********************************//
 
 
 
