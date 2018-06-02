@@ -191,7 +191,78 @@ $app->post('/borrarChofer',function ($request,$response){
 
 
 
+//************ ENCARGADOS ************//
 
+//AGREGAR Encargado  *************************/
+$app->post('/agregarEncargado',function($request,$response){
+    $datos = $request->getParsedBody();
+    $mail = $datos['mail'];
+    $password = $datos['password'];
+    $nombre = $datos['nombre'];
+    $apellido = $datos['apellido'];
+    $dni = $datos['dni'];
+    $telefono = $datos['telefono'];
+    $tipo = $datos['tipo'];
+    $legajo = $datos['legajo'];
+    $id_usuario=$response->write(encargado::agregarEncargado($mail,$password,$nombre,$apellido,$dni,$telefono,$tipo,$legajo));
+    return $response;
+});
+
+//TRAER TODOS LOS Encargados *************************/
+$app->get('/traerTodosLosEncargados',function ($request,$response){
+    $response->write(encargado::traerTodosLosEncargados());
+    return $response;
+});
+
+//TRAER Encargado POR ID *************************/
+$app->post('/traerEncargadoPorId',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(encargado::traerEncargadoPorId($id));
+    return $response;
+});
+
+//TRAER Encargado POR DNI *************************/
+$app->post('/traerEncargadoPorDni',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $dni = $datos['dni'];
+    $response->write(encargado::traerEncargadoPorDni($dni));
+    return $response;
+});
+
+//TRAER Encargado POR LEGAJO *************************/
+$app->post('/traerEncargadoPorLegajo',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $legajo = $datos['legajo'];
+    $response->write(encargado::traerEncargadoPorLegajo($legajo));
+    return $response;
+});
+
+//MODIFICAR Encargado *************************/
+$app->post('/modificarEncargado',function($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $mail = $datos['mail'];
+    $password = $datos['password'];
+    $nombre = $datos['nombre'];
+    $apellido = $datos['apellido'];
+    $dni = $datos['dni'];
+    $telefono = $datos['telefono'];
+    $legajo = $datos['legajo'];
+    $response->write(encargado::modificarEncargado($id,$mail,$password,$nombre,$apellido,$dni,$telefono,$legajo));
+
+    return $response;
+});
+
+//BORRAR Encargado *************************/
+$app->post('/borrarEncargado',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(encargado::borrarEncargado($id));
+    return $response;
+});
+
+//**********************************//
 
 
 
@@ -332,56 +403,6 @@ $app->post('/borrarUsuario',function ($request,$response){
 
 
 
-//************ ENCARGADOS ************//
-
-//AGREGAR ENCARGADO  *************************/
-$app->post('/agregarEncargado',function($request,$response){
-    $datos = $request->getParsedBody();
-    $nombre = $datos['nombre'];
-    $apellido = $datos['apellido'];
-    $dni = $datos['dni'];
-    $telefono = $datos['telefono'];
-    $legajo = $datos['legajo'];
-    $response->write(encargado::agregarEncargado($nombre,$apellido,$dni,$telefono,$legajo));
-});
-
-//TRAER TODOS LOS ENCARGADOS *************************/
-$app->get('/traerTodosLosEncargados',function ($request,$response){
-    $response->write(encargado::traerTodosLosEncargados());
-    return $response;
-});
-
-//TRAER ENCARGADO POR ID *************************/
-$app->post('/traerEncargadoPorId',function ($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $response->write(encargado::traerEncargadoPorId($id));
-    return $response;
-});
-
-//MODIFICAR ENCARGADO *************************/
-$app->post('/modificarEncargado',function($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $nombre = $datos['nombre'];
-    $apellido = $datos['apellido'];
-    $dni = $datos['dni'];
-    $telefono = $datos['telefono'];
-    $legajo = $datos['legajo'];
-    $response->write(encargado::modificarEncargado($id,$nombre,$apellido,$dni,$telefono,$legajo));
-
-    return $response;
-});
-
-//BORRAR ENCARGADO *************************/
-$app->post('/borrarEncargado',function ($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $response->write(encargado::borrarEncargado($id));
-    return $response;
-});
-
-//**********************************//
 
 //************ VEHICULOS ************//
 
