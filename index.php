@@ -37,6 +37,14 @@ $app->get('[/]', function (Request $request, Response $response) {
 
 });
 
+//************ AUTENTICACION ************//
+$mdwAuth = function ( $request, $response, $next) {
+    $token = $request->getHeader('token');
+    if(AutentificadorJWT::verificarToken($token[0])){
+        $response = $next($request,$response);
+    }  
+    return $response;
+};
 
 //************ TOKEN ************//
 $app->post('/crearToken', function (Request $request, Response $response) {
@@ -80,7 +88,7 @@ $app->post('/agregarCliente',function($request,$response){
 $app->get('/traerTodosLosClientes',function ($request,$response){
     $response->write(cliente::traerTodosLosClientes());
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER CLIENTE POR ID *************************/
 $app->post('/traerClientePorId',function ($request,$response){
@@ -157,7 +165,7 @@ $app->post('/agregarChofer',function($request,$response){
 $app->get('/traerTodosLosChoferes',function ($request,$response){
     $response->write(chofer::traerTodosLosChoferes());
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER Chofer POR ID *************************/
 $app->post('/traerChoferPorId',function ($request,$response){
