@@ -4,6 +4,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require_once './vendor/autoload.php';
 require_once './clases/AccesoDatos.php';
+require_once './clases/AutentificadorJWT.php';
 
 require_once './clases/usuario.php';
 require_once './clases/chofer.php';
@@ -35,6 +36,28 @@ $app->get('[/]', function (Request $request, Response $response) {
     return $response;
 
 });
+
+
+//************ TOKEN ************//
+$app->post('/crearToken', function (Request $request, Response $response) {
+    $datos = $request->getParsedBody();
+    //$datos = array('usuario' => 'rogelio@agua.com','perfil' => 'profe', 'alias' => "PinkBoy");
+    $token= AutentificadorJWT::CrearToken($datos); 
+    $newResponse = $response->withJson($token, 200); 
+    return $newResponse;
+});
+
+
+////revisar!
+$app->post('/leerHeader', function (Request $request, Response $response) {
+    $datos = $request->getParsedBody();
+    $header = $request->getHeader('miHeader');
+    $leido = AutentificadorJWT::ObtenerPayLoad($header);
+    var_dump($leido);
+    $newResponse = $response->withJson($header, 200); 
+    return $newResponse;
+});
+//************************//
 
 //************ CLIENTES ************//
 
