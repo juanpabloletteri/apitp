@@ -68,7 +68,7 @@ class chofer{
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * 
         FROM usuarios AS u, choferes AS c 
-        WHERE u.id_usuario=c.id_usuario AND u.id_usuario=:id");
+        WHERE u.id_usuario=c.id_usuario AND c.id_chofer=:id");
 
         $consulta->bindValue(":id",$id);
         $consulta->execute();
