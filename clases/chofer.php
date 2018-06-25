@@ -137,11 +137,17 @@ class chofer{
     //BORRAR chofer
     public static function borrarChofer($id){
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM choferes WHERE id_chofer=:id");
+        $consulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM choferes WHERE id_usuario=:id");
         $consulta->bindValue(":id",$id);
-        $consulta->execute();
-        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-        return json_encode($datos);     
+
+        if($consulta->execute()){
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM usuarios WHERE id_usuario=:id");
+            $consulta->bindValue(":id",$id);
+            $consulta->execute();
+        }
+
+        return 1;     
     }
 
     }

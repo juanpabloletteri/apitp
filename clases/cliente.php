@@ -137,11 +137,17 @@ class cliente{
     //BORRAR cliente
     public static function borrarCliente($id){
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM clientes WHERE id_cliente=:id");
+        $consulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM clientes WHERE id_usuario=:id");
         $consulta->bindValue(":id",$id);
-        $consulta->execute();
-        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-        return json_encode($datos);     
+
+        if($consulta->execute()){
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM usuarios WHERE id_usuario=:id");
+            $consulta->bindValue(":id",$id);
+            $consulta->execute();
+        }
+
+        return 1;      
     }
  
 }
