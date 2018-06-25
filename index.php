@@ -493,7 +493,6 @@ $app->post('/borrarVehiculo',function ($request,$response){
 
 
 //************ VIAJES ************//
-
 //AGREGAR Viaje  *************************/
 $app->post('/agregarViaje',function($request,$response){
     $datos = $request->getParsedBody();
@@ -501,22 +500,22 @@ $app->post('/agregarViaje',function($request,$response){
     $id_cliente = $datos['id_cliente'];
     $id_chofer = $datos['id_chofer'];
     $id_vehiculo = $datos['id_vehiculo'];
-    $direccion_inicio = $datos['direccion_inicio'];
-    $direccion_destino = $datos['direccion_destino'];
+    $latitud_inicio = $datos['latitud_inicio'];
+    $longitud_inicio = $datos['longitud_inicio'];
+    $latitud_destino = $datos['latitud_destino'];
+    $longitud_destino =$datos['longitud_destino'];
     $puntaje_chofer = $datos['puntaje_chofer'];
     $puntaje_vehiculo = $datos['puntaje_vehiculo'];
     $puntaje_cliente = $datos['puntaje_cliente'];
     $estado = $datos['estado'];
     $forma_pago = $datos['forma_pago'];
-    $response->write(Viaje::agregarViaje($id_encargado,$id_cliente,$id_chofer,$id_vehiculo,$direccion_inicio,$direccion_destino,$puntaje_chofer,$puntaje_vehiculo,$puntaje_cliente,$estado,$forma_pago));
+    $response->write(Viaje::agregarViaje($id_encargado,$id_cliente,$id_chofer,$id_vehiculo,$_latitud_inicio,$longitud_inicio,$latitud_destino,$longitud_destino,$puntaje_chofer,$puntaje_vehiculo,$puntaje_cliente,$estado,$forma_pago));
 });
-
 //TRAER TODOS LOS viajes *************************/
 $app->get('/traerTodosLosviajes',function ($request,$response){
     $response->write(Viaje::traerTodosLosviajes());
     return $response;
 });
-
 //TRAER Viaje POR ID *************************/
 $app->post('/traerViajePorId',function ($request,$response){
     $datos = $request->getParsedBody();
@@ -524,7 +523,6 @@ $app->post('/traerViajePorId',function ($request,$response){
     $response->write(Viaje::traerViajePorId($id));
     return $response;
 });
-
 //MODIFICAR Viaje *************************/
 $app->post('/modificarViaje',function($request,$response){
     $datos = $request->getParsedBody();
@@ -541,10 +539,8 @@ $app->post('/modificarViaje',function($request,$response){
     $estado = $datos['estado'];
     $forma_pago = $datos['forma_pago'];
     $response->write(Viaje::modificarViaje($id_encargado,$id_cliente,$id_chofer,$id_vehiculo,$direccion_inicio,$direccion_destino,$puntaje_chofer,$puntaje_vehiculo,$puntaje_cliente,$estado,$forma_pago));
-
     return $response;
 });
-
 //BORRAR Viaje *************************/
 $app->post('/borrarViaje',function ($request,$response){
     $datos = $request->getParsedBody();
@@ -552,9 +548,7 @@ $app->post('/borrarViaje',function ($request,$response){
     $response->write(Viaje::borrarViaje($id));
     return $response;
 });
-
 //**********************************//
-
 
 
 
