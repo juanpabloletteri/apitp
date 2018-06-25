@@ -117,7 +117,7 @@ $app->post('/traerClientePorDomicilio',function ($request,$response){
 //MODIFICAR CLIENTE *************************/
 $app->post('/modificarCliente',function($request,$response){
     $datos = $request->getParsedBody();
-    $id = $datos['id'];
+    $id = $datos['id_usuario'];
     $mail = $datos['mail'];
     $password = $datos['password'];
     $nombre = $datos['nombre'];
@@ -194,7 +194,7 @@ $app->post('/traerChoferPorLegajo',function ($request,$response){
 //MODIFICAR CHOFER *************************/
 $app->post('/modificarChofer',function($request,$response){
     $datos = $request->getParsedBody();
-    $id = $datos['id'];
+    $id = $datos['id_usuario'];
     $mail = $datos['mail'];
     $password = $datos['password'];
     $nombre = $datos['nombre'];
@@ -272,7 +272,7 @@ $app->post('/traerEncargadoPorLegajo',function ($request,$response){
 //MODIFICAR Encargado *************************/
 $app->post('/modificarEncargado',function($request,$response){
     $datos = $request->getParsedBody();
-    $id = $datos['id'];
+    $id = $datos['id_usuario'];
     $mail = $datos['mail'];
     $password = $datos['password'];
     $nombre = $datos['nombre'];
