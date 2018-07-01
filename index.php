@@ -27,6 +27,7 @@ desarrollo para obtener información sobre los errores
   La segunda línea permite al servidor web establecer el encabezado Content-Length, 
   lo que hace que Slim se comporte de manera más predecible.
 */
+////USAR APRA AUTENTICACION ULTIMA LINEA           })->add($mdwAuth);
 
 $app = new \Slim\App(["settings" => $config]);
 
@@ -35,6 +36,16 @@ $app->get('[/]', function (Request $request, Response $response) {
     $response->getBody()->write("GET => Bienvenido!!! ,a SlimFramework");
     return $response;
 
+});
+
+//************ LOGIN ************//
+$app->post('/login', function (Request $request, Response $response) {
+    $datos = $request->getParsedBody();
+    $mail = $datos["mail"];
+    $password = $datos["password"];
+    $newResponse = $response->withJson(usuario::login($mail,$password));
+    //$response->write($pw);
+    return $newResponse;
 });
 
 //************ AUTENTICACION ************//
@@ -54,7 +65,6 @@ $app->post('/crearToken', function (Request $request, Response $response) {
     $newResponse = $response->withJson($token, 200); 
     return $newResponse;
 });
-
 
 ////revisar!
 $app->post('/leerHeader', function (Request $request, Response $response) {
@@ -294,146 +304,6 @@ $app->post('/borrarEncargado',function ($request,$response){
 });
 
 //**********************************//
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////
-//************ USUARIOS ************//
-
-//AGREGAR USUARIO  *************************/
-$app->post('/agregarUsuario',function($request,$response){
-    $datos = $request->getParsedBody();
-    $mail = $datos['mail'];
-    $password = $datos['password'];
-    $nombre = $datos['nombre'];
-    $apellido = $datos['apellido'];
-    $dni = $datos['dni'];
-    $telefono = $datos['telefono'];
-    $tipo = $datos['tipo'];
-    $response->write(usuario::agregarUsuario($mail,$password,$nombre,$apellido,$dni,$telefono,$tipo));
-});
-
-//TRAER TODOS LOS USUARIOS *************************/
-$app->get('/traerTodosLosUsuarios',function ($request,$response){
-    $response->write(usuario::traerTodosLosUsuarios());
-    return $response;
-});
-
-//TRAER USUARIO POR ID *************************/
-$app->post('/traerUsuarioPorId',function ($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $response->write(usuario::traerUsuarioPorId($id));
-    return $response;
-});
-
-//MODIFICAR USUARIO *************************/
-$app->post('/modificarUsuario',function($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $mail = $datos['mail'];
-    $password = $datos['password'];
-    $nombre = $datos['nombre'];
-    $apellido = $datos['apellido'];
-    $dni = $datos['dni'];
-    $telefono = $datos['telefono'];
-    $tipo = $datos['tipo'];
-    $response->write(usuario::modificarUsuario($id,$mail,$password,$nombre,$apellido,$dni,$telefono,$tipo));
-
-    return $response;
-});
-
-//BORRAR USUARIO *************************/
-$app->post('/borrarUsuario',function ($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $response->write(usuario::borrarUsuario($id));
-    return $response;
-});
-
-//**********************************//
-
-
-
-
-
-
-
 
 //************ VEHICULOS ************//
 
