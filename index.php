@@ -90,8 +90,14 @@ $app->post('/agregarCliente',function($request,$response){
     $telefono = $datos['telefono'];
     $tipo = $datos['tipo'];
     $domicilio = $datos['domicilio'];
-    $id_usuario=$response->write(cliente::agregarCliente($mail,$password,$nombre,$apellido,$dni,$telefono,$tipo,$domicilio));
-    return $response;
+    if(usuario::verificarMail($mail)){
+        //$response->write(usuario::agregarUsuario($mail,$password,$nombre,$apellido,$tipo));
+        $id_usuario=$response->write(cliente::agregarCliente($mail,$password,$nombre,$apellido,$dni,$telefono,$tipo,$domicilio));  
+    }
+    else{
+        $newResponse = $response->withJson('Mail en uso');
+        return $newResponse;
+    }
 });
 
 //TRAER TODOS LOS CLIENTES *************************/
