@@ -2,8 +2,8 @@
 -- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 01-07-2018 a las 02:06:50
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 02-07-2018 a las 05:49:51
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -43,7 +43,8 @@ INSERT INTO `choferes` (`id_chofer`, `id_usuario`, `legajo`) VALUES
 (2, 20, 31122),
 (3, 21, 31122),
 (4, 22, 1233),
-(5, 23, 123);
+(5, 23, 123),
+(6, 25, 317);
 
 -- --------------------------------------------------------
 
@@ -79,11 +80,12 @@ INSERT INTO `clientes` (`id_cliente`, `id_usuario`, `domicilio`) VALUES
 (3, 12, '1321321313'),
 (4, 13, '1321321313'),
 (5, 14, '1321321313'),
-(6, 15, '13132'),
-(7, 16, '13132'),
+(6, 15, 'mitre 456'),
+(7, 16, 'altolaguirre 456'),
 (8, 17, '13132'),
 (9, 18, '13132'),
-(10, 24, '234234');
+(10, 24, '234234'),
+(13, 28, 'mitre 4566');
 
 -- --------------------------------------------------------
 
@@ -96,6 +98,14 @@ CREATE TABLE `encargados` (
   `id_usuario` int(11) NOT NULL,
   `legajo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `encargados`
+--
+
+INSERT INTO `encargados` (`id_encargado`, `id_usuario`, `legajo`) VALUES
+(1, 10, 32),
+(2, 9, 0);
 
 -- --------------------------------------------------------
 
@@ -138,9 +148,9 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id_usuario`, `mail`, `password`, `nombre`, `apellido`, `dni`, `telefono`, `tipo`) VALUES
 (9, 'juanp@gmail.com', 'asd123', 'joselooooo', 'perez', 36451289, 142233654, 1),
-(10, 'mail', 'uberto29124119', 'Pablo', 'Frenkel', 29544119, 2147483647, 3),
-(11, 'mail', 'uberto29124119', 'Julian', 'Guibaudo', 29132219, 2147483647, 3),
-(12, 'mail', 'uberto29124119', 'Ariel', 'Lambezat', 33124119, 2147483647, 3),
+(10, 'encargado', '1', 'Pablo', 'Frenkel', 29544119, 2147483647, 1),
+(11, 'chofer', '2', 'Julian', 'Marquez', 29132219, 2147483647, 2),
+(12, 'cliente', '3', 'Ariel', 'Lambezat', 33124119, 2147483647, 3),
 (13, 'mail', 'uberto29124119', 'Natalia', 'Labonia', 29124119, 2147483647, 3),
 (14, 'mail', 'uberto29124119', 'Giselle', 'Molina', 29124119, 2147483647, 3),
 (15, 'mail', 'uberto16546461', 'Estefania', 'Villalba', 16546461, 2147483647, 3),
@@ -152,7 +162,9 @@ INSERT INTO `usuarios` (`id_usuario`, `mail`, `password`, `nombre`, `apellido`, 
 (21, 'chofer@gmail.com', 'uberto12312312', 'Enrique', 'Messi', 23456324, 1233434343, 2),
 (22, 'chof@gm.com', 'uberto1233123', 'Roberto', 'Machuca', 31459835, 312312312, 2),
 (23, 'jum@com.com', 'uberto1233321', 'Maria', 'Sanchez', 21777283, 321321, 2),
-(24, '21@asd.cpom', 'uberto123', 'Eugenio', 'Labonia', 27123332, 432423, 3);
+(24, '21@asd.cpom', 'uberto123', 'Eugenio', 'Labonia', 27123332, 432423, 3),
+(25, 'juan@hoa.com', 'uberto29125558', 'juan', 'carlos', 29125558, 1164856632, 2),
+(28, 'ignalop@gmail.com', 'uberto36445112', 'ignacio', 'loprete', 36445112, 1164896324, 3);
 
 -- --------------------------------------------------------
 
@@ -181,7 +193,9 @@ INSERT INTO `vehiculos` (`id_vehiculo`, `id_chofer`, `marca`, `modelo`, `anio`, 
 (5, 3, 'toyota', 'etios', 2017, 1, 0, 1),
 (6, 4, 'chevrolet', 'corsa', 2015, 1, 1, 0),
 (7, 5, 'chevrolet', 'corsa', 2016, 1, 1, 1),
-(8, 0, 'chevrolet', 'corsa', 2015, 1, 1, 1);
+(8, 6, 'chevrolet', 'corsa', 2015, 1, 1, 1),
+(9, 0, 'fiat', 'palio', 2015, 0, 1, 0),
+(10, 0, 'chevrolet', 'onix', 2018, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -195,10 +209,10 @@ CREATE TABLE `viajes` (
   `id_cliente` int(11) NOT NULL,
   `id_chofer` int(11) NOT NULL,
   `id_vehiculo` int(11) NOT NULL,
-  `latitud_inicio` int(30) NOT NULL,
-  `longitud_inicio` int(30) NOT NULL,
-  `latitud_destino` int(30) NOT NULL,
-  `longitud_destino` int(30) NOT NULL,
+  `latitud_inicio` float NOT NULL,
+  `longitud_inicio` double NOT NULL,
+  `latitud_destino` double NOT NULL,
+  `longitud_destino` double NOT NULL,
   `inicio` varchar(250) NOT NULL,
   `destino` varchar(250) NOT NULL,
   `distancia` int(11) NOT NULL,
@@ -277,19 +291,19 @@ ALTER TABLE `viajes`
 -- AUTO_INCREMENT de la tabla `choferes`
 --
 ALTER TABLE `choferes`
-  MODIFY `id_chofer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_chofer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `encargados`
 --
 ALTER TABLE `encargados`
-  MODIFY `id_encargado` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_encargado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `puntajes`
@@ -301,19 +315,19 @@ ALTER TABLE `puntajes`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `vehiculos`
 --
 ALTER TABLE `vehiculos`
-  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `viajes`
 --
 ALTER TABLE `viajes`
-  MODIFY `id_viaje` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_viaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
@@ -349,14 +363,6 @@ ALTER TABLE `encargados`
 --
 ALTER TABLE `puntajes`
   ADD CONSTRAINT `puntajes_ibfk_1` FOREIGN KEY (`id_viaje`) REFERENCES `viajes` (`id_viaje`);
-
---
--- Filtros para la tabla `viajes`
---
-ALTER TABLE `viajes`
-  ADD CONSTRAINT `viajes_ibfk_1` FOREIGN KEY (`id_encargado`) REFERENCES `encargados` (`id_encargado`),
-  ADD CONSTRAINT `viajes_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`),
-  ADD CONSTRAINT `viajes_ibfk_3` FOREIGN KEY (`id_vehiculo`) REFERENCES `choferes` (`id_chofer`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
