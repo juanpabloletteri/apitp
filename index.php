@@ -381,12 +381,12 @@ $app->post('/agregarViaje',function($request,$response){
     $latDest = $datos['latitud_destino'];
     $lonDest =$datos['longitud_destino'];
     $formaPago = $datos['forma_pago'];
-    $formaPago = $datos['fecha'];
-    $formaPago = $datos['estado'];
-    $formaPago = $datos['distancia'];
-    $formaPago = $datos['costo'];
-    $formaPago = $datos['inicio'];
-    $formaPago = $datos['destino'];
+    $fecha = $datos['fecha'];
+    //$estado = $datos['estado'];
+    $dist = $datos['distancia'];
+    $costo = $datos['costo'];
+    $inicio = $datos['inicio'];
+    $destino = $datos['destino'];
     $response->write(Viaje::agregarViaje($idE,$idC,$idCho,$idV,$dist,$costo,$formaPago,$latIn,$lonIn,$latDest,$lonDest,$inicio,$destino,$fecha));
 });
 //TRAER TODOS LOS viajes *************************/
