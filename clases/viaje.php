@@ -52,6 +52,24 @@ class Viaje {
         $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($consulta);
     }
+    //TRAER VIAJES CON CLIENTES
+        public static function traerTodosLosviajesConClientes()
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM viajes AS v, usuarios AS u WHERE v.id_cliente = u.id_usuario");
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
+    //TRAER VIAJES CON CHOFER
+    public static function traerTodosLosviajesConChoferes()
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM viajes AS v, usuarios AS u WHERE v.id_chofer = u.id_usuario");
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
     //TRAER Viaje POR ID
     public static function traerViajePorId($id)
     {

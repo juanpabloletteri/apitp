@@ -394,6 +394,16 @@ $app->get('/traerTodosLosviajes',function ($request,$response){
     $response->write(Viaje::traerTodosLosviajes());
     return $response;
 });
+//TRAER TODOS LOS viajes CON CLIENTES*************************/
+$app->get('/traerTodosLosviajesConClientes',function ($request,$response){
+    $response->write(Viaje::traerTodosLosviajesConClientes());
+    return $response;
+});
+//TRAER TODOS LOS viajes CON CHOFERES*************************/
+$app->get('/traerTodosLosviajesConChoferes',function ($request,$response){
+    $response->write(Viaje::traerTodosLosviajesConChoferes());
+    return $response;
+});
 //TRAER Viaje POR ID *************************/
 $app->post('/traerViajePorId',function ($request,$response){
     $datos = $request->getParsedBody();
