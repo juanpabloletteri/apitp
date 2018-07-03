@@ -416,6 +416,14 @@ $app->post('/traerViajesPorCliente',function ($request,$response){
     return $response;
 });
 //MODIFICAR Viaje *************************/
+$app->post('/cambiarEstadoViaje',function($request,$response){
+  $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $estado = $datos['estado'];
+    $response->write(Viaje::cambiarEstadoViaje($id,$estado));
+    return $response;
+});
+//MODIFICAR Viaje *************************/
 $app->post('/modificarViaje',function($request,$response){
     $datos = $request->getParsedBody();
     $id = $datos['id'];

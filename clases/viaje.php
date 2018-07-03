@@ -81,7 +81,21 @@ class Viaje {
         $consulta->execute();
         $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($datos);     
-    }        
+    }       
+    //CAMBIAR ESTADO VIAJE
+    public static function cambiarEstadoViaje($id,$estado){
+        $rta = false;
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE `viajes` 
+        SET `estado`= :estado
+        WHERE id_viaje = :id");
+        $consulta->bindValue(':id',$id);
+        $consulta->bindValue(':estado',$estado);
+        if ($consulta->execute()){
+            $rta = true;
+        }
+        return $rta;
+    } 
    //MODIFICAR Viaje
     public static function modificarViaje($id,$id_encargado,$id_cliente,$id_chofer,$id_vehiculo,$direccion_inicio,$direccion_destino,$puntaje_chofer,$puntaje_vehiculo,$puntaje_cliente,$estado,$forma_pago){
         $rta = false;
