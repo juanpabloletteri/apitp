@@ -44,6 +44,18 @@ class vehiculo {
         return json_encode($consulta);
     }
 
+    //TRAER TODOS LOS vehiculos CON SUS CHOFERES
+    public static function traerTodosLosVehiculosConChoferes()
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * 
+        FROM vehiculos AS v, choferes AS c, usuarios AS u
+        WHERE v.id_chofer = c.id_chofer AND c.id_usuario = u.id_usuario");
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
+
     //TRAER vehiculo POR ID
     public static function traerVehiculoPorId($id)
     {

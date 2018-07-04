@@ -62,6 +62,19 @@ class chofer{
         return json_encode($consulta);
     }
 
+    //TRAER TODOS LOS choferes LIBRES
+    public static function traerTodosLosChoferesLibres()
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM choferes AS c, usuarios AS u 
+        WHERE c.id_usuario=u.id_usuario AND 
+        NOT EXISTS (SELECT * FROM vehiculos WHERE vehiculos.id_chofer = c.id_chofer)");
+        
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
+
     //TRAER chofer POR ID
     public static function traerChoferPorId($id)
     {

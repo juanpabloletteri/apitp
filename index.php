@@ -181,7 +181,13 @@ $app->post('/agregarChofer',function($request,$response){
 $app->get('/traerTodosLosChoferes',function ($request,$response){
     $response->write(chofer::traerTodosLosChoferes());
     return $response;
-})->add($mdwAuth);
+});
+
+//TRAER TODOS LOS CHOFERES LIBRES *************************/
+$app->get('/traerTodosLosChoferesLibres',function ($request,$response){
+    $response->write(chofer::traerTodosLosChoferesLibres());
+    return $response;
+});
 
 //TRAER Chofer POR ID *************************/
 $app->post('/traerChoferPorId',function ($request,$response){
@@ -329,6 +335,12 @@ $app->post('/agregarVehiculo',function($request,$response){
 //TRAER TODOS LOS Vehiculos *************************/
 $app->get('/traerTodosLosVehiculos',function ($request,$response){
     $response->write(vehiculo::traerTodosLosVehiculos());
+    return $response;
+});
+
+//TRAER TODOS LOS Vehiculos con choferes *************************/
+$app->get('/traerTodosLosVehiculosConChoferes',function ($request,$response){
+    $response->write(vehiculo::traerTodosLosVehiculosConChoferes());
     return $response;
 });
 
