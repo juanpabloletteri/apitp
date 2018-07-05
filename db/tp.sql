@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-07-2018 a las 05:49:51
+-- Tiempo de generación: 05-07-2018 a las 04:06:39
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -44,7 +44,8 @@ INSERT INTO `choferes` (`id_chofer`, `id_usuario`, `legajo`) VALUES
 (3, 21, 31122),
 (4, 22, 1233),
 (5, 23, 123),
-(6, 25, 317);
+(6, 25, 317),
+(7, 11, 333);
 
 -- --------------------------------------------------------
 
@@ -75,8 +76,6 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id_cliente`, `id_usuario`, `domicilio`) VALUES
-(1, 10, '1321321313'),
-(2, 11, '1321321313'),
 (3, 12, '1321321313'),
 (4, 13, '1321321313'),
 (5, 14, '1321321313'),
@@ -110,20 +109,30 @@ INSERT INTO `encargados` (`id_encargado`, `id_usuario`, `legajo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `puntajes`
+-- Estructura de tabla para la tabla `encuestas`
 --
 
-CREATE TABLE `puntajes` (
-  `id_puntaje` int(11) NOT NULL,
+CREATE TABLE `encuestas` (
+  `id_encuesta` int(11) NOT NULL,
   `id_viaje` int(11) NOT NULL,
   `puntaje_viaje` int(11) NOT NULL,
   `id_chofer` int(11) NOT NULL,
   `puntaje_chofer` int(11) NOT NULL,
   `id_vehiculo` int(11) NOT NULL,
   `puntaje_vehiculo` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `puntaje_cliente` int(11) NOT NULL
+  `pregunta1` int(11) NOT NULL,
+  `pregunta2` int(11) NOT NULL,
+  `pregunta3` int(11) NOT NULL,
+  `pregunta4` int(11) NOT NULL,
+  `observaciones` varchar(250) COLLATE utf16_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `encuestas`
+--
+
+INSERT INTO `encuestas` (`id_encuesta`, `id_viaje`, `puntaje_viaje`, `id_chofer`, `puntaje_chofer`, `id_vehiculo`, `puntaje_vehiculo`, `pregunta1`, `pregunta2`, `pregunta3`, `pregunta4`, `observaciones`) VALUES
+(1, 24, 1, 11, 1, 10, 1, 1, 1, 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -191,11 +200,9 @@ INSERT INTO `vehiculos` (`id_vehiculo`, `id_chofer`, `marca`, `modelo`, `anio`, 
 (3, 1, 'chevrolet', 'corsa', 2015, 0, 0, 0),
 (4, 2, 'fiat', 'palio', 2017, 1, 1, 0),
 (5, 3, 'toyota', 'etios', 2017, 1, 0, 1),
-(6, 4, 'chevrolet', 'corsa', 2015, 1, 1, 0),
+(6, 7, 'chevrolet', 'corsa', 2015, 1, 1, 0),
 (7, 5, 'chevrolet', 'corsa', 2016, 1, 1, 1),
-(8, 6, 'chevrolet', 'corsa', 2015, 1, 1, 1),
-(9, 0, 'fiat', 'palio', 2015, 0, 1, 0),
-(10, 0, 'chevrolet', 'onix', 2018, 0, 1, 0);
+(8, 6, 'chevrolet', 'corsa', 2015, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -209,7 +216,7 @@ CREATE TABLE `viajes` (
   `id_cliente` int(11) NOT NULL,
   `id_chofer` int(11) NOT NULL,
   `id_vehiculo` int(11) NOT NULL,
-  `latitud_inicio` float NOT NULL,
+  `latitud_inicio` double NOT NULL,
   `longitud_inicio` double NOT NULL,
   `latitud_destino` double NOT NULL,
   `longitud_destino` double NOT NULL,
@@ -221,6 +228,23 @@ CREATE TABLE `viajes` (
   `fecha` datetime NOT NULL,
   `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `viajes`
+--
+
+INSERT INTO `viajes` (`id_viaje`, `id_encargado`, `id_cliente`, `id_chofer`, `id_vehiculo`, `latitud_inicio`, `longitud_inicio`, `latitud_destino`, `longitud_destino`, `inicio`, `destino`, `distancia`, `costo`, `forma_pago`, `fecha`, `estado`) VALUES
+(20, 10, 12, 25, 10, -34.7009162902832, -58.3431821, -34.6747324, -58.6254466, 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 'Lanús 2805, B1708HGU Morón, Buenos Aires, Argentina', 41602, 624, 0, '0000-00-00 00:00:00', 0),
+(21, 10, 13, 25, 10, -32.91782760620117, -60.7393517, -34.7009156, -58.3431821, 'José Ingenieros 8200, S2006DGP Rosario, Santa Fe, Argentina', 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 315717, 4736, 0, '0000-00-00 00:00:00', 0),
+(22, 10, 12, 23, 10, -34.7009162902832, -58.3431821, -34.7009156, -58.3431821, 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 142, 4536, 0, '0000-00-00 00:00:00', 0),
+(23, 10, 14, 11, 10, -34.7009162902832, -58.3431821, -34.7206336, -58.2546051, 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 'Avenida Mitre 599, Quilmes, Buenos Aires, Argentina', 10662, 160, 0, '0000-00-00 00:00:00', 1),
+(24, 0, 12, 11, 10, -34.7009162902832, -58.3431821, -34.7009156, -58.3431821, 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 453, 453453, 0, '0000-00-00 00:00:00', 1),
+(25, 0, 12, 11, 10, -34.7009162902832, -58.3431821, -34.7009156, -58.3431821, 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 123, 453, 0, '0000-00-00 00:00:00', 0),
+(26, 10, 15, 11, 10, -34.7009162902832, -58.3431821, -34.7009156, -58.3431821, 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 788, 345, 0, '0000-00-00 00:00:00', 0),
+(27, 10, 16, 23, 6, -34.69330596923828, -58.3137285, -35.0491425, -58.7595053, 'Merlo 5701, B1875BZE Wilde, Buenos Aires, Argentina', 'Florida 1023, B1814EVU Cañuelas, Buenos Aires, Argentina', 80254, 1204, 0, '0000-00-00 00:00:00', 1),
+(28, 0, 12, 11, 5, -34.6747324, -58.6254466, -34.6677742, -58.3513222, 'Lanús 2805, B1708HGU Morón, Buenos Aires, Argentina', 'Av. Gral. Roca 1871, Crucecita, Buenos Aires, Argentina', 37756, 566, 0, '0000-00-00 00:00:00', 1),
+(29, 10, 12, 11, 5, -34.6747324, -58.6254466, -34.6677742, -58.3513222, 'Lanús 2805, B1708HGU Morón, Buenos Aires, Argentina', 'Av. Gral. Roca 1871, Crucecita, Buenos Aires, Argentina', 37756, 566, 0, '0000-00-00 00:00:00', 1),
+(30, 10, 12, 21, 5, -34.6747324, -58.6254466, -34.6677742, -58.3513222, 'Lanús 2805, B1708HGU Morón, Buenos Aires, Argentina', 'Av. Gral. Roca 1871, Crucecita, Buenos Aires, Argentina', 37756, 566, 0, '0000-00-00 00:00:00', 1);
 
 --
 -- Índices para tablas volcadas
@@ -255,11 +279,11 @@ ALTER TABLE `encargados`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indices de la tabla `puntajes`
+-- Indices de la tabla `encuestas`
 --
-ALTER TABLE `puntajes`
-  ADD PRIMARY KEY (`id_puntaje`),
-  ADD KEY `id_viaje` (`id_viaje`,`id_chofer`,`id_vehiculo`,`id_cliente`);
+ALTER TABLE `encuestas`
+  ADD PRIMARY KEY (`id_encuesta`),
+  ADD KEY `id_viaje` (`id_viaje`,`id_chofer`,`id_vehiculo`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -291,7 +315,7 @@ ALTER TABLE `viajes`
 -- AUTO_INCREMENT de la tabla `choferes`
 --
 ALTER TABLE `choferes`
-  MODIFY `id_chofer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_chofer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
@@ -306,10 +330,10 @@ ALTER TABLE `encargados`
   MODIFY `id_encargado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `puntajes`
+-- AUTO_INCREMENT de la tabla `encuestas`
 --
-ALTER TABLE `puntajes`
-  MODIFY `id_puntaje` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `encuestas`
+  MODIFY `id_encuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -321,13 +345,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `vehiculos`
 --
 ALTER TABLE `vehiculos`
-  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `viajes`
 --
 ALTER TABLE `viajes`
-  MODIFY `id_viaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_viaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Restricciones para tablas volcadas
@@ -359,10 +383,10 @@ ALTER TABLE `encargados`
   ADD CONSTRAINT `encargados_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
 
 --
--- Filtros para la tabla `puntajes`
+-- Filtros para la tabla `encuestas`
 --
-ALTER TABLE `puntajes`
-  ADD CONSTRAINT `puntajes_ibfk_1` FOREIGN KEY (`id_viaje`) REFERENCES `viajes` (`id_viaje`);
+ALTER TABLE `encuestas`
+  ADD CONSTRAINT `encuestas_ibfk_1` FOREIGN KEY (`id_viaje`) REFERENCES `viajes` (`id_viaje`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

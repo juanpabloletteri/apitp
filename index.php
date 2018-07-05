@@ -12,6 +12,7 @@ require_once './clases/cliente.php';
 require_once './clases/encargado.php';
 require_once './clases/vehiculo.php';
 require_once './clases/viaje.php';
+require_once './clases/encuesta.php';
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -472,7 +473,33 @@ $app->post('/borrarViaje',function ($request,$response){
 });
 //**********************************//
 
-
-
+//************ ENCUESTAS ************////AGREGAR encuesta  *************************/
+$app->post('/agregarEncuesta',function($request,$response){
+    $datos = $request->getParsedBody();
+    $id_viaje = $datos['id_viaje'];
+    $puntaje_viaje = $datos['puntaje_viaje'];
+    $id_chofer = $datos['id_chofer'];
+    $puntaje_chofer = $datos['puntaje_chofer'];
+    $id_vehiculo = $datos['id_vehiculo'];
+    $puntaje_vehiculo = $datos['puntaje_vehiculo'];
+    $pregunta1 = $datos['pregunta1'];
+    $pregunta2 = $datos['pregunta2'];
+    $pregunta3 = $datos['pregunta3'];
+    $pregunta4 = $datos['pregunta4'];
+    $observaciones = $datos['observaciones'];
+    $response->write(encuesta::agregarEncuesta($id_viaje,$puntaje_viaje,$id_chofer,$puntaje_chofer,$id_vehiculo,$puntaje_vehiculo,$pregunta1,$pregunta2,$pregunta3,$pregunta4,$observaciones));
+});
+//TRAER TODAS LAS ENCUESTAS *************************/
+$app->get('/traerTodasLasEncuestas',function ($request,$response){
+    $response->write(encuesta::traerTodasLasEncuestas());
+    return $response;
+});
+//TRAER ENCUESTA POR ID VIAJE *************************/
+$app->post('/traerEncuestaPorIdViaje',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(encuesta::traerEncuestaPorIdViaje($id));
+    return $response;
+});
 
 $app->run();
