@@ -113,7 +113,7 @@ $app->post('/traerClientePorId',function ($request,$response){
     $id = $datos['id'];
     $response->write(cliente::traerClientePorId($id));
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER CLIENTE POR DNI *************************/
 $app->post('/traerClientePorDni',function ($request,$response){
@@ -121,7 +121,7 @@ $app->post('/traerClientePorDni',function ($request,$response){
     $dni = $datos['dni'];
     $response->write(cliente::traerClientePorDni($dni));
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER CLIENTE POR DOMICILIO *************************/
 $app->post('/traerClientePorDomicilio',function ($request,$response){
@@ -129,7 +129,7 @@ $app->post('/traerClientePorDomicilio',function ($request,$response){
     $domicilio = $datos['domicilio'];
     $response->write(cliente::traerClientePorDomicilio($domicilio));
     return $response;
-});
+})->add($mdwAuth);
 
 //MODIFICAR CLIENTE *************************/
 $app->post('/modificarCliente',function($request,$response){
@@ -145,7 +145,7 @@ $app->post('/modificarCliente',function($request,$response){
     $response->write(cliente::modificarCliente($id,$mail,$password,$nombre,$apellido,$dni,$telefono,$domicilio));
 
     return $response;
-});
+})->add($mdwAuth);
 
 //BORRAR CLIENTE *************************/
 $app->post('/borrarCliente',function ($request,$response){
@@ -153,7 +153,7 @@ $app->post('/borrarCliente',function ($request,$response){
     $id = $datos['id'];
     $response->write(cliente::borrarCliente($id));
     return $response;
-});
+})->add($mdwAuth);
 
 //**********************************//
 
@@ -176,19 +176,19 @@ $app->post('/agregarChofer',function($request,$response){
     $legajo = $datos['legajo'];
     $id_usuario=$response->write(chofer::agregarChofer($mail,$password,$nombre,$apellido,$dni,$telefono,$tipo,$legajo));
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER TODOS LOS CHOFERES *************************/
 $app->get('/traerTodosLosChoferes',function ($request,$response){
     $response->write(chofer::traerTodosLosChoferes());
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER TODOS LOS CHOFERES LIBRES *************************/
 $app->get('/traerTodosLosChoferesLibres',function ($request,$response){
     $response->write(chofer::traerTodosLosChoferesLibres());
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER Chofer POR ID *************************/
 $app->post('/traerChoferPorId',function ($request,$response){
@@ -196,7 +196,7 @@ $app->post('/traerChoferPorId',function ($request,$response){
     $id = $datos['id'];
     $response->write(chofer::traerChoferPorId($id));
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER CHOFER POR DNI *************************/
 $app->post('/traerChoferPorDni',function ($request,$response){
@@ -204,7 +204,7 @@ $app->post('/traerChoferPorDni',function ($request,$response){
     $dni = $datos['dni'];
     $response->write(chofer::traerChoferPorDni($dni));
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER CHOFER POR LEGAJO *************************/
 $app->post('/traerChoferPorLegajo',function ($request,$response){
@@ -212,7 +212,7 @@ $app->post('/traerChoferPorLegajo',function ($request,$response){
     $legajo = $datos['legajo'];
     $response->write(chofer::traerChoferPorLegajo($legajo));
     return $response;
-});
+})->add($mdwAuth);
 
 //MODIFICAR CHOFER *************************/
 $app->post('/modificarChofer',function($request,$response){
@@ -228,7 +228,7 @@ $app->post('/modificarChofer',function($request,$response){
     $response->write(chofer::modificarChofer($id,$mail,$password,$nombre,$apellido,$dni,$telefono,$legajo));
 
     return $response;
-});
+})->add($mdwAuth);
 
 //BORRAR CHOFER *************************/
 $app->post('/borrarChofer',function ($request,$response){
@@ -236,7 +236,7 @@ $app->post('/borrarChofer',function ($request,$response){
     $id = $datos['id'];
     $response->write(chofer::borrarChofer($id));
     return $response;
-});
+})->add($mdwAuth);
 
 //**********************************//
 
@@ -260,13 +260,13 @@ $app->post('/agregarEncargado',function($request,$response){
     $legajo = $datos['legajo'];
     $id_usuario=$response->write(encargado::agregarEncargado($mail,$password,$nombre,$apellido,$dni,$telefono,$tipo,$legajo));
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER TODOS LOS Encargados *************************/
 $app->get('/traerTodosLosEncargados',function ($request,$response){
     $response->write(encargado::traerTodosLosEncargados());
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER Encargado POR ID *************************/
 $app->post('/traerEncargadoPorId',function ($request,$response){
@@ -274,7 +274,7 @@ $app->post('/traerEncargadoPorId',function ($request,$response){
     $id = $datos['id'];
     $response->write(encargado::traerEncargadoPorId($id));
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER Encargado POR DNI *************************/
 $app->post('/traerEncargadoPorDni',function ($request,$response){
@@ -282,7 +282,7 @@ $app->post('/traerEncargadoPorDni',function ($request,$response){
     $dni = $datos['dni'];
     $response->write(encargado::traerEncargadoPorDni($dni));
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER Encargado POR LEGAJO *************************/
 $app->post('/traerEncargadoPorLegajo',function ($request,$response){
@@ -290,7 +290,7 @@ $app->post('/traerEncargadoPorLegajo',function ($request,$response){
     $legajo = $datos['legajo'];
     $response->write(encargado::traerEncargadoPorLegajo($legajo));
     return $response;
-});
+})->add($mdwAuth);
 
 //MODIFICAR Encargado *************************/
 $app->post('/modificarEncargado',function($request,$response){
@@ -306,7 +306,7 @@ $app->post('/modificarEncargado',function($request,$response){
     $response->write(encargado::modificarEncargado($id,$mail,$password,$nombre,$apellido,$dni,$telefono,$legajo));
 
     return $response;
-});
+})->add($mdwAuth);
 
 //BORRAR Encargado *************************/
 $app->post('/borrarEncargado',function ($request,$response){
@@ -314,7 +314,7 @@ $app->post('/borrarEncargado',function ($request,$response){
     $id = $datos['id'];
     $response->write(encargado::borrarEncargado($id));
     return $response;
-});
+})->add($mdwAuth);
 
 //**********************************//
 
@@ -331,19 +331,19 @@ $app->post('/agregarVehiculo',function($request,$response){
     $aire = $datos['aire'];
     $baul = $datos['baul'];
     $response->write(vehiculo::agregarVehiculo($id_chofer,$marca,$modelo,$anio,$fumar,$aire,$baul));
-});
+})->add($mdwAuth);
 
 //TRAER TODOS LOS Vehiculos *************************/
 $app->get('/traerTodosLosVehiculos',function ($request,$response){
     $response->write(vehiculo::traerTodosLosVehiculos());
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER TODOS LOS Vehiculos con choferes *************************/
 $app->get('/traerTodosLosVehiculosConChoferes',function ($request,$response){
     $response->write(vehiculo::traerTodosLosVehiculosConChoferes());
     return $response;
-});
+})->add($mdwAuth);
 
 //TRAER Vehiculo POR ID *************************/
 $app->post('/traerVehiculoPorId',function ($request,$response){
@@ -351,7 +351,7 @@ $app->post('/traerVehiculoPorId',function ($request,$response){
     $id = $datos['id'];
     $response->write(vehiculo::traerVehiculoPorId($id));
     return $response;
-});
+})->add($mdwAuth);
 
 //MODIFICAR Vehiculo *************************/
 $app->post('/modificarVehiculo',function($request,$response){
@@ -367,7 +367,7 @@ $app->post('/modificarVehiculo',function($request,$response){
     $response->write(vehiculo::modificarVehiculo($id,$id_chofer,$marca,$modelo,$anio,$fumar,$aire,$baul));
 
     return $response;
-});
+})->add($mdwAuth);
 
 //BORRAR Vehiculo *************************/
 $app->post('/borrarVehiculo',function ($request,$response){
@@ -375,7 +375,7 @@ $app->post('/borrarVehiculo',function ($request,$response){
     $id = $datos['id'];
     $response->write(vehiculo::borrarVehiculo($id));
     return $response;
-});
+})->add($mdwAuth);
 
 //**********************************//
 
@@ -401,43 +401,43 @@ $app->post('/agregarViaje',function($request,$response){
     $inicio = $datos['inicio'];
     $destino = $datos['destino'];
     $response->write(Viaje::agregarViaje($idE,$idC,$idCho,$idV,$dist,$costo,$formaPago,$latIn,$lonIn,$latDest,$lonDest,$inicio,$destino,$fecha));
-});
+})->add($mdwAuth);
 //TRAER TODOS LOS viajes *************************/
 $app->get('/traerTodosLosviajes',function ($request,$response){
     $response->write(Viaje::traerTodosLosviajes());
     return $response;
-});
+})->add($mdwAuth);
 //TRAER TODOS LOS viajes CON CLIENTES*************************/
 $app->get('/traerTodosLosviajesConClientes',function ($request,$response){
     $response->write(Viaje::traerTodosLosviajesConClientes());
     return $response;
-});
+})->add($mdwAuth);
 //TRAER TODOS LOS viajes CON CHOFERES*************************/
 $app->get('/traerTodosLosviajesConChoferes',function ($request,$response){
     $response->write(Viaje::traerTodosLosviajesConChoferes());
     return $response;
-});
+})->add($mdwAuth);
 //TRAER Viaje POR ID *************************/
 $app->post('/traerViajePorId',function ($request,$response){
     $datos = $request->getParsedBody();
     $id = $datos['id'];
     $response->write(Viaje::traerViajePorId($id));
     return $response;
-});
+})->add($mdwAuth);
 //TRAER Viaje POR CHOFER *************************/
 $app->post('/traerViajesPorChofer',function ($request,$response){
     $datos = $request->getParsedBody();
     $id = $datos['id'];
     $response->write(Viaje::traerViajesPorChofer($id));
     return $response;
-});
+})->add($mdwAuth);
 //TRAER Viaje POR CLIENTE *************************/
 $app->post('/traerViajesPorCliente',function ($request,$response){
     $datos = $request->getParsedBody();
     $id = $datos['id'];
     $response->write(Viaje::traerViajesPorCliente($id));
     return $response;
-});
+})->add($mdwAuth);
 //MODIFICAR Viaje *************************/
 $app->post('/cambiarEstadoViaje',function($request,$response){
   $datos = $request->getParsedBody();
@@ -445,7 +445,7 @@ $app->post('/cambiarEstadoViaje',function($request,$response){
     $estado = $datos['estado'];
     $response->write(Viaje::cambiarEstadoViaje($id,$estado));
     return $response;
-});
+})->add($mdwAuth);
 //MODIFICAR Viaje *************************/
 $app->post('/modificarViaje',function($request,$response){
     $datos = $request->getParsedBody();
@@ -463,14 +463,14 @@ $app->post('/modificarViaje',function($request,$response){
     $forma_pago = $datos['forma_pago'];
     $response->write(Viaje::modificarViaje($id_encargado,$id_cliente,$id_chofer,$id_vehiculo,$direccion_inicio,$direccion_destino,$puntaje_chofer,$puntaje_vehiculo,$puntaje_cliente,$estado,$forma_pago));
     return $response;
-});
+})->add($mdwAuth);
 //BORRAR Viaje *************************/
 $app->post('/borrarViaje',function ($request,$response){
     $datos = $request->getParsedBody();
     $id = $datos['id'];
     $response->write(Viaje::borrarViaje($id));
     return $response;
-});
+})->add($mdwAuth);
 //**********************************//
 
 //************ ENCUESTAS ************////AGREGAR encuesta  *************************/
@@ -488,18 +488,18 @@ $app->post('/agregarEncuesta',function($request,$response){
     $pregunta4 = $datos['pregunta4'];
     $observaciones = $datos['observaciones'];
     $response->write(encuesta::agregarEncuesta($id_viaje,$puntaje_viaje,$id_chofer,$puntaje_chofer,$id_vehiculo,$puntaje_vehiculo,$pregunta1,$pregunta2,$pregunta3,$pregunta4,$observaciones));
-});
+})->add($mdwAuth);
 //TRAER TODAS LAS ENCUESTAS *************************/
 $app->get('/traerTodasLasEncuestas',function ($request,$response){
     $response->write(encuesta::traerTodasLasEncuestas());
     return $response;
-});
+})->add($mdwAuth);
 //TRAER ENCUESTA POR ID VIAJE *************************/
 $app->post('/traerEncuestaPorIdViaje',function ($request,$response){
     $datos = $request->getParsedBody();
     $id = $datos['id'];
     $response->write(encuesta::traerEncuestaPorIdViaje($id));
     return $response;
-});
+})->add($mdwAuth);
 
 $app->run();
