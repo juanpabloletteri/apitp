@@ -134,6 +134,21 @@ class cliente{
         return $rta;
     }
 
+    //CAMBIAR ESTADO CLIENTE
+    public static function cambiarEstadoCliente($id,$estado){
+        $rta = false;
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE `usuarios` 
+        SET `tipo`= :estado
+        WHERE id_usuario = :id");
+        $consulta->bindValue(':id',$id);
+        $consulta->bindValue(':estado',$estado);
+        if ($consulta->execute()){
+            $rta = true;
+        }
+        return $rta;
+    } 
+
     //BORRAR cliente
     public static function borrarCliente($id){
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();

@@ -131,6 +131,16 @@ $app->post('/traerClientePorDomicilio',function ($request,$response){
     return $response;
 })->add($mdwAuth);
 
+//MODIFICAR Estado cliente *************************/
+$app->post('/cambiarEstadoCliente',function($request,$response){
+    $datos = $request->getParsedBody();
+      $id = $datos['id'];
+      $estado = $datos['estado'];
+      $response->write(cliente::cambiarEstadoCliente($id,$estado));
+      return $response;
+})->add($mdwAuth);
+
+
 //MODIFICAR CLIENTE *************************/
 $app->post('/modificarCliente',function($request,$response){
     $datos = $request->getParsedBody();
@@ -213,6 +223,15 @@ $app->post('/traerChoferPorLegajo',function ($request,$response){
     $response->write(chofer::traerChoferPorLegajo($legajo));
     return $response;
 })->add($mdwAuth);
+
+//MODIFICAR Estado chofer *************************/
+$app->post('/cambiarEstadoChofer',function($request,$response){
+    $datos = $request->getParsedBody();
+      $id = $datos['id'];
+      $estado = $datos['estado'];
+      $response->write(chofer::cambiarEstadoChofer($id,$estado));
+      return $response;
+  })->add($mdwAuth);
 
 //MODIFICAR CHOFER *************************/
 $app->post('/modificarChofer',function($request,$response){
