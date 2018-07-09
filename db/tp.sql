@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-07-2018 a las 04:06:39
+-- Tiempo de generación: 10-07-2018 a las 00:06:53
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -84,7 +84,8 @@ INSERT INTO `clientes` (`id_cliente`, `id_usuario`, `domicilio`) VALUES
 (8, 17, '13132'),
 (9, 18, '13132'),
 (10, 24, '234234'),
-(13, 28, 'mitre 4566');
+(13, 28, 'mitre 4566'),
+(15, 30, '32132132');
 
 -- --------------------------------------------------------
 
@@ -132,7 +133,8 @@ CREATE TABLE `encuestas` (
 --
 
 INSERT INTO `encuestas` (`id_encuesta`, `id_viaje`, `puntaje_viaje`, `id_chofer`, `puntaje_chofer`, `id_vehiculo`, `puntaje_vehiculo`, `pregunta1`, `pregunta2`, `pregunta3`, `pregunta4`, `observaciones`) VALUES
-(1, 24, 1, 11, 1, 10, 1, 1, 1, 1, 1, '');
+(3, 24, 2, 11, 2, 10, 3, 4, 4, 5, 4, 'asDASDDASSDAF'),
+(5, 28, 3, 11, 4, 5, 2, 3, 5, 5, 4, 'sdasdqwdqwd');
 
 -- --------------------------------------------------------
 
@@ -163,17 +165,18 @@ INSERT INTO `usuarios` (`id_usuario`, `mail`, `password`, `nombre`, `apellido`, 
 (13, 'mail', 'uberto29124119', 'Natalia', 'Labonia', 29124119, 2147483647, 3),
 (14, 'mail', 'uberto29124119', 'Giselle', 'Molina', 29124119, 2147483647, 3),
 (15, 'mail', 'uberto16546461', 'Estefania', 'Villalba', 16546461, 2147483647, 3),
-(16, 'mail', 'uberto16546461', 'Rogelio', 'Aguada', 16546461, 2147483647, 3),
+(16, 'mail', 'uberto16546461', 'Rogelio', 'Aguada', 16546461, 2147483647, -3),
 (17, 'mailssss', 'uberto16546461', 'Matias', 'Lenriques', 16546461, 2147483647, 3),
 (18, 'mailssssqweqwe', 'uberto16546461', 'Lorena', 'Encinas', 16546461, 2147483647, 3),
 (19, 'chofer@gmail.com', 'uberto12312312', 'Juan', 'Mazzedo', 29125567, 1233434343, 2),
-(20, 'chofer@gmail.com', 'uberto12312312', 'Jose', 'Fernandez', 36987632, 1233434343, 2),
-(21, 'chofer@gmail.com', 'uberto12312312', 'Enrique', 'Messi', 23456324, 1233434343, 2),
+(20, 'chofer@gmail.com2', 'uberto12312312', 'Jose', 'Fernandez', 36987632, 1233434343, 2),
+(21, 'chofer@gmail.com3', 'uberto12312312', 'Enrique', 'Messi', 23456324, 1233434343, -2),
 (22, 'chof@gm.com', 'uberto1233123', 'Roberto', 'Machuca', 31459835, 312312312, 2),
 (23, 'jum@com.com', 'uberto1233321', 'Maria', 'Sanchez', 21777283, 321321, 2),
-(24, '21@asd.cpom', 'uberto123', 'Eugenio', 'Labonia', 27123332, 432423, 3),
+(24, '21@asd.cpom', 'uberto123', 'Eugenio', 'Labonia', 27123332, 432423, -3),
 (25, 'juan@hoa.com', 'uberto29125558', 'juan', 'carlos', 29125558, 1164856632, 2),
-(28, 'ignalop@gmail.com', 'uberto36445112', 'ignacio', 'loprete', 36445112, 1164896324, 3);
+(28, 'ignalop@gmail.com', 'uberto36445112', 'ignacio', 'loprete', 36445112, 1164896324, 3),
+(30, 'nuevo@nuevo.com', '000000', 'nuevo', 'nuevo', 1131, 4555225, -3);
 
 -- --------------------------------------------------------
 
@@ -225,7 +228,8 @@ CREATE TABLE `viajes` (
   `distancia` int(11) NOT NULL,
   `costo` int(11) NOT NULL,
   `forma_pago` int(11) NOT NULL,
-  `fecha` datetime NOT NULL,
+  `fecha_salida` datetime NOT NULL,
+  `fecha_llegada` datetime NOT NULL,
   `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -233,18 +237,13 @@ CREATE TABLE `viajes` (
 -- Volcado de datos para la tabla `viajes`
 --
 
-INSERT INTO `viajes` (`id_viaje`, `id_encargado`, `id_cliente`, `id_chofer`, `id_vehiculo`, `latitud_inicio`, `longitud_inicio`, `latitud_destino`, `longitud_destino`, `inicio`, `destino`, `distancia`, `costo`, `forma_pago`, `fecha`, `estado`) VALUES
-(20, 10, 12, 25, 10, -34.7009162902832, -58.3431821, -34.6747324, -58.6254466, 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 'Lanús 2805, B1708HGU Morón, Buenos Aires, Argentina', 41602, 624, 0, '0000-00-00 00:00:00', 0),
-(21, 10, 13, 25, 10, -32.91782760620117, -60.7393517, -34.7009156, -58.3431821, 'José Ingenieros 8200, S2006DGP Rosario, Santa Fe, Argentina', 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 315717, 4736, 0, '0000-00-00 00:00:00', 0),
-(22, 10, 12, 23, 10, -34.7009162902832, -58.3431821, -34.7009156, -58.3431821, 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 142, 4536, 0, '0000-00-00 00:00:00', 0),
-(23, 10, 14, 11, 10, -34.7009162902832, -58.3431821, -34.7206336, -58.2546051, 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 'Avenida Mitre 599, Quilmes, Buenos Aires, Argentina', 10662, 160, 0, '0000-00-00 00:00:00', 1),
-(24, 0, 12, 11, 10, -34.7009162902832, -58.3431821, -34.7009156, -58.3431821, 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 453, 453453, 0, '0000-00-00 00:00:00', 1),
-(25, 0, 12, 11, 10, -34.7009162902832, -58.3431821, -34.7009156, -58.3431821, 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 123, 453, 0, '0000-00-00 00:00:00', 0),
-(26, 10, 15, 11, 10, -34.7009162902832, -58.3431821, -34.7009156, -58.3431821, 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 788, 345, 0, '0000-00-00 00:00:00', 0),
-(27, 10, 16, 23, 6, -34.69330596923828, -58.3137285, -35.0491425, -58.7595053, 'Merlo 5701, B1875BZE Wilde, Buenos Aires, Argentina', 'Florida 1023, B1814EVU Cañuelas, Buenos Aires, Argentina', 80254, 1204, 0, '0000-00-00 00:00:00', 1),
-(28, 0, 12, 11, 5, -34.6747324, -58.6254466, -34.6677742, -58.3513222, 'Lanús 2805, B1708HGU Morón, Buenos Aires, Argentina', 'Av. Gral. Roca 1871, Crucecita, Buenos Aires, Argentina', 37756, 566, 0, '0000-00-00 00:00:00', 1),
-(29, 10, 12, 11, 5, -34.6747324, -58.6254466, -34.6677742, -58.3513222, 'Lanús 2805, B1708HGU Morón, Buenos Aires, Argentina', 'Av. Gral. Roca 1871, Crucecita, Buenos Aires, Argentina', 37756, 566, 0, '0000-00-00 00:00:00', 1),
-(30, 10, 12, 21, 5, -34.6747324, -58.6254466, -34.6677742, -58.3513222, 'Lanús 2805, B1708HGU Morón, Buenos Aires, Argentina', 'Av. Gral. Roca 1871, Crucecita, Buenos Aires, Argentina', 37756, 566, 0, '0000-00-00 00:00:00', 1);
+INSERT INTO `viajes` (`id_viaje`, `id_encargado`, `id_cliente`, `id_chofer`, `id_vehiculo`, `latitud_inicio`, `longitud_inicio`, `latitud_destino`, `longitud_destino`, `inicio`, `destino`, `distancia`, `costo`, `forma_pago`, `fecha_salida`, `fecha_llegada`, `estado`) VALUES
+(24, 0, 12, 11, 10, -34.7009162902832, -58.3431821, -34.7009156, -58.3431821, 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 'Manuel Gálvez 4502, B1874AXB Villa Dominico, Buenos Aires, Argentina', 453, 453453, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+(28, 0, 12, 11, 5, -34.6747324, -58.6254466, -34.6677742, -58.3513222, 'Lanús 2805, B1708HGU Morón, Buenos Aires, Argentina', 'Av. Gral. Roca 1871, Crucecita, Buenos Aires, Argentina', 37756, 566, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+(34, 10, 13, 21, 5, -34.6909632, -58.3431821, -34.6747324, -58.6254466, 'Almte Solier 3848, B1872FSS Sarandí, Buenos Aires, Argentina', 'Lanús 2805, B1708HGU Morón, Buenos Aires, Argentina', 39868, 598, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
+(35, 0, 12, 20, 4, -34.6747324, -58.6254466, -34.6933055, -58.3137285, 'Lanús 2805, B1708HGU Morón, Buenos Aires, Argentina', 'Merlo 5701, B1875BZE Wilde, Buenos Aires, Argentina', 41590, 624, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
+(36, 10, 14, 20, 4, -34.7028734, -58.315991, -34.6600733, -58.3685215, 'Av. las Flores 115, B1834ETK Temperley, Buenos Aires, Argentina', 'Av. Bartolomé Mitre 401, Avellaneda, Buenos Aires, Argentina', 7361, 110, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
+(37, 10, 12, 25, 8, -34.6747324, -58.6254466, -32.9178259, -60.7393517, 'Lanús 2805, B1708HGU Morón, Buenos Aires, Argentina', 'José Ingenieros 8200, S2006DGP Rosario, Santa Fe, Argentina', 314914, 4724, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
 
 --
 -- Índices para tablas volcadas
@@ -321,7 +320,7 @@ ALTER TABLE `choferes`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `encargados`
@@ -333,13 +332,13 @@ ALTER TABLE `encargados`
 -- AUTO_INCREMENT de la tabla `encuestas`
 --
 ALTER TABLE `encuestas`
-  MODIFY `id_encuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_encuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `vehiculos`
@@ -351,7 +350,7 @@ ALTER TABLE `vehiculos`
 -- AUTO_INCREMENT de la tabla `viajes`
 --
 ALTER TABLE `viajes`
-  MODIFY `id_viaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_viaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- Restricciones para tablas volcadas

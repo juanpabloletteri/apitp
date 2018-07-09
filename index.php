@@ -419,13 +419,13 @@ $app->post('/agregarViaje',function($request,$response){
     $latDest = $datos['latitud_destino'];
     $lonDest =$datos['longitud_destino'];
     $formaPago = $datos['forma_pago'];
-    $fecha = $datos['fecha'];
+    $fecha_salida = $datos['fecha_salida'];
     //$estado = $datos['estado'];
     $dist = $datos['distancia'];
     $costo = $datos['costo'];
     $inicio = $datos['inicio'];
     $destino = $datos['destino'];
-    $response->write(Viaje::agregarViaje($idE,$idC,$idCho,$idV,$dist,$costo,$formaPago,$latIn,$lonIn,$latDest,$lonDest,$inicio,$destino,$fecha));
+    $response->write(Viaje::agregarViaje($idE,$idC,$idCho,$idV,$dist,$costo,$formaPago,$latIn,$lonIn,$latDest,$lonDest,$inicio,$destino,$fecha_salida));
 })->add($mdwAuth);
 //TRAER TODOS LOS viajes *************************/
 $app->get('/traerTodosLosviajes',function ($request,$response){
