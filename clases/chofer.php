@@ -62,6 +62,19 @@ class chofer{
         return json_encode($consulta);
     }
 
+    //TRAER choferes validos
+    public static function traerChoferesValidos()
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * 
+        FROM usuarios AS u, choferes AS c 
+        WHERE u.id_usuario=c.id_usuario AND u.tipo != -2");
+        
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
+
     //TRAER TODOS LOS choferes LIBRES
     public static function traerTodosLosChoferesLibres()
     {

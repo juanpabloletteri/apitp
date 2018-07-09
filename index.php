@@ -194,6 +194,12 @@ $app->get('/traerTodosLosChoferes',function ($request,$response){
     return $response;
 })->add($mdwAuth);
 
+//TRAER CHOFERES *************************/
+$app->get('/traerChoferesValidos',function ($request,$response){
+    $response->write(chofer::traerChoferesValidos());
+    return $response;
+})->add($mdwAuth);
+
 //TRAER TODOS LOS CHOFERES LIBRES *************************/
 $app->get('/traerTodosLosChoferesLibres',function ($request,$response){
     $response->write(chofer::traerTodosLosChoferesLibres());
