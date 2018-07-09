@@ -50,7 +50,7 @@ class vehiculo {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * 
         FROM vehiculos AS v, choferes AS c, usuarios AS u
-        WHERE v.id_chofer = c.id_chofer AND c.id_usuario = u.id_usuario");
+        WHERE v.id_chofer = c.id_chofer AND c.id_usuario = u.id_usuario AND u.tipo!=-2");
         $consulta->execute();
         $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($consulta);
