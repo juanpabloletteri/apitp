@@ -86,7 +86,9 @@ class Viaje {
     public static function traerViajesPorChofer($id)
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM viajes WHERE id_chofer=:id");
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * 
+        FROM viajes AS v, usuarios AS u  
+        WHERE v.id_chofer=:id AND v.id_cliente=u.id_usuario");
         $consulta->bindValue(":id",$id);
         $consulta->execute();
         $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
