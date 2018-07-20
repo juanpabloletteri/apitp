@@ -126,8 +126,22 @@ class Viaje {
         $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($consulta);
     }
-    
-
+    public static function traerCantidadDeViajesPorCliente($id){
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT `estado`, count(*) AS cantidad FROM `viajes` WHERE id_cliente=:id GROUP BY `estado`");
+        $consulta->bindValue(":id",$id);
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
+    public static function traerCantidadDeViajesPorChofer($id){
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT `estado`, count(*) AS cantidad FROM `viajes` WHERE id_chofer=:id GROUP BY `estado`");
+        $consulta->bindValue(":id",$id);
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
 
 
 

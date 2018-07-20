@@ -471,11 +471,29 @@ $app->post('/cambiarEstadoViaje',function($request,$response){
     $response->write(Viaje::cambiarEstadoViaje($id,$estado));
     return $response;
 })->add($mdwAuth);
+
+
+
 //ESTADISTICAS*************************/
+//TRER TODOS LOS VIAJES SEGUN ESTADO
 $app->get('/traerCantidadDeViajes',function ($request,$response){
     $response->write(Viaje::traerCantidadDeViajes());
     return $response;
 })->add($mdwAuth);
+//TRER TODOS LOS VIAJES SEGUN ESTADO POR CLIENTE
+$app->post('/traerCantidadDeViajesPorCliente',function($request,$response){
+  $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(Viaje::traerCantidadDeViajesPorCliente($id));
+    return $response;
+})->add($mdwAuth);
+//TRER TODOS LOS VIAJES SEGUN ESTADO POR CHOFER
+$app->post('/traerCantidadDeViajesPorChofer',function($request,$response){
+    $datos = $request->getParsedBody();
+      $id = $datos['id'];
+      $response->write(Viaje::traerCantidadDeViajesPorChofer($id));
+      return $response;
+    })->add($mdwAuth);
 //BORRAR Viaje *************************/
 $app->post('/borrarViaje',function ($request,$response){
     $datos = $request->getParsedBody();
