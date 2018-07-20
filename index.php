@@ -487,13 +487,42 @@ $app->post('/traerCantidadDeViajesPorCliente',function($request,$response){
     $response->write(Viaje::traerCantidadDeViajesPorCliente($id));
     return $response;
 })->add($mdwAuth);
+//metros recorridos
+$app->post('/traerMetrosRecorridosPorCliente',function($request,$response){
+  $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(Viaje::traerMetrosRecorridosPorCliente($id));
+    return $response;
+})->add($mdwAuth);
+//dinero gastado
+$app->post('/traerDineroGastadoPorCliente',function($request,$response){
+  $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(Viaje::traerDineroGastadoPorCliente($id));
+    return $response;
+})->add($mdwAuth);
 //TRER TODOS LOS VIAJES SEGUN ESTADO POR CHOFER
 $app->post('/traerCantidadDeViajesPorChofer',function($request,$response){
     $datos = $request->getParsedBody();
       $id = $datos['id'];
       $response->write(Viaje::traerCantidadDeViajesPorChofer($id));
       return $response;
-    })->add($mdwAuth);
+})->add($mdwAuth);
+//metros recorridos
+$app->post('/traerMetrosRecorridosPorChofer',function($request,$response){
+    $datos = $request->getParsedBody();
+      $id = $datos['id'];
+      $response->write(Viaje::traerMetrosRecorridosPorChofer($id));
+      return $response;
+})->add($mdwAuth);
+  //dinero gastado
+  $app->post('/traerDineroGanadoPorChofer',function($request,$response){
+    $datos = $request->getParsedBody();
+      $id = $datos['id'];
+      $response->write(Viaje::traerDineroGanadoPorChofer($id));
+      return $response;
+})->add($mdwAuth);
+
 //BORRAR Viaje *************************/
 $app->post('/borrarViaje',function ($request,$response){
     $datos = $request->getParsedBody();

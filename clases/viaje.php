@@ -119,21 +119,41 @@ class Viaje {
         return $rta;
     }
     //ESTADISTICAS
+    //todos los viajes por estado
     public static function traerCantidadDeViajes(){
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT `estado`, count(*) AS cantidad FROM `viajes` GROUP BY `estado`");
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT `estado`, COUNT(*) AS cantidad FROM `viajes` GROUP BY `estado`");
         $consulta->execute();
         $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($consulta);
     }
+    //ESTADISTICAS - CLIENTES
     public static function traerCantidadDeViajesPorCliente($id){
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT `estado`, count(*) AS cantidad FROM `viajes` WHERE id_cliente=:id GROUP BY `estado`");
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT `estado`, COUNT(*) AS cantidad FROM `viajes` WHERE id_cliente=:id GROUP BY `estado`");
         $consulta->bindValue(":id",$id);
         $consulta->execute();
         $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($consulta);
     }
+    public static function traerMetrosRecorridosPorCliente($id){
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT SUM(`distancia`) AS distancia FROM `viajes` WHERE id_cliente=:id AND estado=-3");
+        $consulta->bindValue(":id",$id);
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
+    public static function traerDineroGastadoPorCliente($id){
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT SUM(`costo`) AS costo FROM `viajes` WHERE id_cliente=:id AND estado=-3");
+        $consulta->bindValue(":id",$id);
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
+
+    //ESTADISTICAS - CHOFERES
     public static function traerCantidadDeViajesPorChofer($id){
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("SELECT `estado`, count(*) AS cantidad FROM `viajes` WHERE id_chofer=:id GROUP BY `estado`");
@@ -142,7 +162,22 @@ class Viaje {
         $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($consulta);
     }
-
+    public static function traerMetrosRecorridosPorChofer($id){
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT SUM(`distancia`) AS distancia FROM `viajes` WHERE id_chofer=:id AND estado=-3");
+        $consulta->bindValue(":id",$id);
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
+    public static function traerDineroGanadoPorChofer($id){
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT SUM(`costo`) AS costo FROM `viajes` WHERE id_chofer=:id AND estado=-3");
+        $consulta->bindValue(":id",$id);
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
 
 
 
