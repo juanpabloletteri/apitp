@@ -117,7 +117,33 @@ class Viaje {
             $rta = true;
         }
         return $rta;
-    } 
+    }
+    //ESTADISTICAS
+    public static function traerCantidadDeViajes(){
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT `estado`, count(*) AS cantidad FROM `viajes` GROUP BY `estado`");
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //NO FUNCIONAN VIEJOS
    //MODIFICAR Viaje
     public static function modificarViaje($id,$id_encargado,$id_cliente,$id_chofer,$id_vehiculo,$direccion_inicio,$direccion_destino,$puntaje_chofer,$puntaje_vehiculo,$puntaje_cliente,$estado,$forma_pago){
         $rta = false;

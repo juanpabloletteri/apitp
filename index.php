@@ -471,22 +471,9 @@ $app->post('/cambiarEstadoViaje',function($request,$response){
     $response->write(Viaje::cambiarEstadoViaje($id,$estado));
     return $response;
 })->add($mdwAuth);
-//MODIFICAR Viaje *************************/
-$app->post('/modificarViaje',function($request,$response){
-    $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $id_encargado = $datos['id_encargado'];
-    $id_cliente = $datos['id_cliente'];
-    $id_chofer = $datos['id_chofer'];
-    $id_vehiculo = $datos['id_vehiculo'];
-    $direccion_inicio = $datos['direccion_inicio'];
-    $direccion_destino = $datos['direccion_destino'];
-    $puntaje_chofer = $datos['puntaje_chofer'];
-    $puntaje_vehiculo = $datos['puntaje_vehiculo'];
-    $puntaje_cliente = $datos['puntaje_cliente'];
-    $estado = $datos['estado'];
-    $forma_pago = $datos['forma_pago'];
-    $response->write(Viaje::modificarViaje($id_encargado,$id_cliente,$id_chofer,$id_vehiculo,$direccion_inicio,$direccion_destino,$puntaje_chofer,$puntaje_vehiculo,$puntaje_cliente,$estado,$forma_pago));
+//ESTADISTICAS*************************/
+$app->get('/traerCantidadDeViajes',function ($request,$response){
+    $response->write(Viaje::traerCantidadDeViajes());
     return $response;
 })->add($mdwAuth);
 //BORRAR Viaje *************************/
