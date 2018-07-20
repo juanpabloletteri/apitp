@@ -480,6 +480,14 @@ $app->get('/traerCantidadDeViajes',function ($request,$response){
     $response->write(Viaje::traerCantidadDeViajes());
     return $response;
 })->add($mdwAuth);
+$app->get('/traerMetrosRecorridos',function ($request,$response){
+    $response->write(Viaje::traerMetrosRecorridos());
+    return $response;
+})->add($mdwAuth);
+$app->get('/traerDineroGanado',function ($request,$response){
+    $response->write(Viaje::traerDineroGanado());
+    return $response;
+})->add($mdwAuth);
 //TRER TODOS LOS VIAJES SEGUN ESTADO POR CLIENTE
 $app->post('/traerCantidadDeViajesPorCliente',function($request,$response){
   $datos = $request->getParsedBody();

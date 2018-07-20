@@ -127,6 +127,20 @@ class Viaje {
         $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($consulta);
     }
+    public static function traerMetrosRecorridos(){
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT SUM(`distancia`) AS distancia FROM `viajes` WHERE estado=-3");
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
+    public static function traerDineroGanado(){
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT SUM(`costo`) AS costo FROM `viajes` WHERE estado=-3");
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
     //ESTADISTICAS - CLIENTES
     public static function traerCantidadDeViajesPorCliente($id){
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
