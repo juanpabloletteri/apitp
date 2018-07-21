@@ -488,6 +488,14 @@ $app->get('/traerDineroGanado',function ($request,$response){
     $response->write(Viaje::traerDineroGanado());
     return $response;
 })->add($mdwAuth);
+$app->get('/estadisticasCliente',function ($request,$response){
+    $response->write(Viaje::estadisticasCliente());
+    return $response;
+})->add($mdwAuth);
+$app->get('/estadisticasChofer',function ($request,$response){
+    $response->write(Viaje::estadisticasChofer());
+    return $response;
+})->add($mdwAuth);
 //TRER TODOS LOS VIAJES SEGUN ESTADO POR CLIENTE
 $app->post('/traerCantidadDeViajesPorCliente',function($request,$response){
   $datos = $request->getParsedBody();

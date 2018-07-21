@@ -141,6 +141,28 @@ class Viaje {
         $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($consulta);
     }
+    public static function estadisticasCliente(){
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta(
+        "SELECT id_cliente, nombre, apellido, mail, SUM(`distancia`/1000) AS distancia, SUM(`costo`) AS dinero, COUNT(*) AS viajes 
+        FROM `viajes` AS v, `usuarios` AS u 
+        WHERE v.id_cliente=u.id_usuario AND estado=-3 
+        GROUP BY `id_cliente`");
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
+    public static function estadisticasChofer(){
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta(
+        "SELECT v.id_chofer, legajo, nombre, apellido, mail, SUM(`distancia`/1000) AS distancia, SUM(`costo`) AS dinero, COUNT(*) AS viajes  
+        FROM `viajes` AS v, `usuarios` AS u, `choferes` AS c
+        WHERE v.id_chofer=u.id_usuario AND u.id_usuario=c.id_usuario AND estado=-3 
+        GROUP BY `id_chofer`");
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
     //ESTADISTICAS - CLIENTES
     public static function traerCantidadDeViajesPorCliente($id){
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
